@@ -16,7 +16,7 @@ export default function Index() {
   return (
     <div className="flex flex-col gap-y-36 py-8 lg:py-24">
       <Container variant="box">
-        <div className="bg-hero w-full bg-cover bg-gray-700 bg-blend-multiply bg-center rounded-xl text-gray-100 lg:px-48 py-24 flex flex-col items-center text-center">
+        <div className="bg-hero w-full bg-cover bg-gray-700 bg-blend-multiply bg-center rounded-xl text-gray-100 px-8 lg:px-48 py-24 flex flex-col items-center text-center">
           <Title headingLevel="h1" className="mb-4">
             Get labeled data
             <br />
@@ -27,7 +27,7 @@ export default function Index() {
             of data, such as images or text. With those data, you can train your
             ML model.
           </p>
-          <div className="flex gap-x-4">
+          <div className="flex flex-wrap gap-4">
             <Anchor to="/" type="button" variant="primary">
               Get started
             </Anchor>

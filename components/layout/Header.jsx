@@ -124,7 +124,7 @@ export default function Header() {
   const { data: session, status } = useSession();
   return (
     <Popover className="relative bg-white shadow">
-      <div className="px-4 sm:px-80">
+      <div className="px-4 md:px-8 lg:px-20 xl:px-40 2xl:px-80">
         <div className="flex justify-between items-center py-6 lg:justify-start md:space-x-10">
           <div className="flex justify-start">
             <Logo />
@@ -318,7 +318,7 @@ export default function Header() {
                   Sign In
                 </Anchor>
                 <Anchor to={path.auth.signUp} type="button" variant="primary">
-                  Gather data now
+                  Sign Up
                 </Anchor>
               </>
             )}

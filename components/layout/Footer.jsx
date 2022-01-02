@@ -60,7 +60,7 @@ const footer = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white px-4 md:px-80 py-12">
+    <footer className="bg-white py-12 px-4 md:px-8 lg:px-20 xl:px-40 2xl:px-80">
       <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-x-64 gap-y-8">
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-y-8">
           <Logo />
