@@ -1,9 +1,15 @@
 import Image from "next/image";
+import { joinClassNames } from "utils/helpers";
 
-export default function Avatar({ image }) {
+export default function Avatar({ src, className, alt }) {
   return (
-    <div className="relative inline-block h-full w-8 h-8 rounded-full shadow overflow-hidden">
-      <Image src={image} alt="Picture of the author" layout="fill" />
+    <div
+      className={joinClassNames(
+        "relative inline-block rounded-full shadow overflow-hidden ring-offset-2 ring-1 lg:ring-2",
+        className
+      )}
+    >
+      <Image src={src} alt={alt} layout="fill" />
     </div>
   );
 }

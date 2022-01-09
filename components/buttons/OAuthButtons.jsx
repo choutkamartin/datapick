@@ -1,11 +1,11 @@
-import OAuthButton from "components/buttons/OAuthButton";
+import { signIn } from "next-auth/react";
 import {
   faFacebook,
   faGithub,
   faGoogle,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { signIn } from "next-auth/react";
+import OAuthButton from "components/buttons/OAuthButton";
 
 const oAuthProviders = [
   {

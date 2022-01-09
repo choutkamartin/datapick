@@ -1,6 +1,6 @@
+import { Fragment } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
-import { Fragment } from "react";
 import Link from "next/link";
 import Anchor from "components/links/Anchor";
 import path from "utils/path";

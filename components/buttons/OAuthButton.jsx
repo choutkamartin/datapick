@@ -1,5 +1,5 @@
-import { joinClassNames } from "utils/helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { joinClassNames } from "utils/helpers";
 
 export default function OAuthButton({ title, icon, className, ...props }) {
   return (

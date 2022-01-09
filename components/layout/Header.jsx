@@ -139,7 +139,7 @@ export default function Header() {
                       <Popover.Button
                         className={joinClassNames(
                           open ? "text-gray-900" : "text-gray-600",
-                          "group rounded-md inline-flex items-center text-base font-semibold hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                          "group rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         )}
                       >
                         <span>{item.name}</span>
