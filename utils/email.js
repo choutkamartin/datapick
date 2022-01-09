@@ -9,6 +9,7 @@ const sendEmail = async (email, verificationLink) => {
       ToAddresses: [email],
     },
     TemplateData: `{ "email": "${email}", "verificationLink": "${verificationLink}" }`,
+    SourceArn: process.env.EMAIL_SOURCE_ARN,
   };
 
   try {
