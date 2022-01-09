@@ -7,6 +7,7 @@ module.exports = {
       "avatars.githubusercontent.com",
       "pbs.twimg.com",
       "images.unsplash.com",
+      "datapick.s3.eu-central-1.amazonaws.com",
     ],
   },
 };
