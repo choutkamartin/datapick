@@ -12,6 +12,9 @@ export default {
     help: "/company/help",
     company: "/company/company",
   },
+  projects: {
+    dashboard: "/projects/dashboard",
+  },
   auth: {
     forgotPassword: "/auth/forgot-password",
     signIn: "/auth/sign-in",
@@ -19,7 +22,10 @@ export default {
     newUser: "/auth/new-user",
   },
   user: {
+    apiKeys: "/user/api-keys",
+    billingInfo: "/user/billing-info",
     profile: "/user/profile",
+    team: "/user/team",
   },
   social: {
     facebook: "facebook",
