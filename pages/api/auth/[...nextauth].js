@@ -1,11 +1,11 @@
 import NextAuth from "next-auth";
-import { MongooseAdapter } from "@next-auth/mongoose-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import TwitterProvider from "next-auth/providers/twitter";
 import FacebookProvider from "next-auth/providers/facebook";
 import GitHubProvider from "next-auth/providers/github";
 import { scryptSync } from "crypto";
+import { MongooseAdapter } from "@choutkamartin/mongoose-adapter";
 import User from "models/User";
 import dbConnect from "lib/dbConnect";
 
@@ -56,8 +56,21 @@ export default NextAuth({
   session: {
     strategy: "jwt",
   },
+  callbacks: {
+    async session({ session, token }) {
+      await dbConnect();
+      session.user = await User.findById(token.user.id || token.user._id);
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
+  },
   pages: {
-    signIn: "/auth/sign-in", // Displays signin buttons
+    signIn: "/auth/sign-in",
     verifyRequest: "/auth/verify-request",
     newUser: null,
   },
