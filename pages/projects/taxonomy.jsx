@@ -34,7 +34,7 @@ const objectTypes = [
 function Taxonomy() {
   const router = useRouter();
   const { id } = router.query;
-  const [error, setError] = useState("Lorem ipsum dolor sit atmet");
+  const [error, setError] = useState();
   const [type, setType] = useState(null);
   const [objects, setObject] = useState([]);
 
@@ -63,9 +63,9 @@ function Taxonomy() {
     });
     const data = await response.json();
     if (response.ok) {
-      console.log(data);
+      router.push("/projects/dashboard");
     } else {
-      console.log(data);
+      setError(data);
     }
   }
 
