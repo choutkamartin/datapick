@@ -21,7 +21,7 @@ function NewProject() {
   const router = useRouter();
   const { id } = router.query;
   const { data: session, status } = useSession();
-  const [filesSelected, setFilesSelected] = useState();
+  const [filesSelected, setFilesSelected] = useState([]);
   const [files, setFiles] = useState();
   const [uploadedFile, setUploadedFile] = useState([]);
 
@@ -127,9 +127,14 @@ function NewProject() {
                       multiple
                       accept="image/png, image/jpeg"
                     />
-                    <Button type="button" onClick={handleSubmission}>
-                      Upload
-                    </Button>
+                    {filesSelected.length != 0 && (
+                      <Button
+                        type="button"
+                        onClick={handleSubmission}
+                      >
+                        Upload
+                      </Button>
+                    )}
                   </Form.Body>
                 </Form>
                 <VerticalLine />
