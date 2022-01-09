@@ -9,14 +9,13 @@ const sendEmail = async (email, verificationLink) => {
       ToAddresses: [email],
     },
     TemplateData: `{ "email": "${email}", "verificationLink": "${verificationLink}" }`,
-    SourceArn: process.env.EMAIL_SOURCE_ARN,
   };
 
   try {
     const data = await sesClient.send(new SendTemplatedEmailCommand(params));
     return data;
   } catch (err) {
-    console.log("Error", err);
+    throw err;
   }
 };
 

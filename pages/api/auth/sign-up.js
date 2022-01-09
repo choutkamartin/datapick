@@ -23,8 +23,9 @@ export default async function handler(req, res) {
         return resolve();
       }
       const verificationLink = `${url}${newUser}?token=${verificationToken}`;
-      const response = sendEmail(email, verificationLink);
-      res.json(response);
+      sendEmail(email, verificationLink).then((response) => {
+        res.json(response);
+      });
     });
   });
 }
