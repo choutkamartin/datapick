@@ -10,9 +10,10 @@ import Container from "components/layout/Container";
 import Title from "components/Title";
 import Anchor from "components/links/Anchor";
 import Brand from "components/logos/Brand";
+import Paragraph from "components/Paragraph";
 import path from "utils/path";
 
-export default function Index() {
+const Index = () => {
   return (
     <div className="flex flex-col gap-y-36 py-8 lg:py-24">
       <Container variant="box">
@@ -22,11 +23,11 @@ export default function Index() {
             <br />
             <span className="text-indigo-300">fast and easily</span>
           </Title>
-          <p className="mb-4">
+          <Paragraph className="mb-3">
             Datapick is a data labelling tool, used for labelling various sorts
             of data, such as images or text. With those data, you can train your
             ML model.
-          </p>
+          </Paragraph>
           <div className="flex flex-wrap gap-4">
             <Anchor to="/" type="button" variant="primary">
               Get started
@@ -74,4 +75,7 @@ export default function Index() {
       </Container>
     </div>
   );
-}
+};
+
+Index.layout = "Public";
+export default Index;

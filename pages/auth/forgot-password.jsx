@@ -6,7 +6,7 @@ import Button from "components/buttons/Button";
 import Container from "components/layout/Container";
 import Card from "components/layout/Card";
 
-export default function ForgotPassword() {
+function ForgotPassword() {
   const {
     register,
     handleSubmit,
@@ -53,3 +53,6 @@ export default function ForgotPassword() {
     </Container>
   );
 }
+
+ForgotPassword.layout = "Public";
+export default ForgotPassword;

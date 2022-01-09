@@ -28,7 +28,7 @@ const authErrors = {
   default: "Unable to sign in.",
 };
 
-export default function SignIn() {
+function SignIn() {
   const router = useRouter();
   const { error } = router.query;
   const errorMessage = error && (authErrors[error] ?? authErrors.default);
@@ -89,3 +89,6 @@ export default function SignIn() {
     </Container>
   );
 }
+
+SignIn.layout = "Public";
+export default SignIn;

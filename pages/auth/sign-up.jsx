@@ -13,7 +13,7 @@ import Container from "components/layout/Container";
 import Card from "components/layout/Card";
 import path from "utils/path";
 
-export default function SignIn() {
+function SignUp() {
   const [error, setError] = useState(null);
   const {
     register,
@@ -80,3 +80,6 @@ export default function SignIn() {
     </Container>
   );
 }
+
+SignUp.layout = "Public";
+export default SignUp;

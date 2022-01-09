@@ -8,7 +8,7 @@ import Error from "components/alerts/Error";
 import Container from "components/layout/Container";
 import Card from "components/layout/Card";
 
-export default function NewUser({ user, error }) {
+function NewUser({ user, error }) {
   const {
     register,
     handleSubmit,
@@ -120,6 +120,9 @@ export default function NewUser({ user, error }) {
     </Container>
   );
 }
+
+NewUser.layout = "Public";
+export default NewUser;
 
 export async function getServerSideProps({ query }) {
   const url = process.env.NEXTAUTH_URL;
