@@ -8,13 +8,13 @@ export default function Title({ children, headingLevel, className }) {
   let classes;
   switch (level) {
     case "h1":
-      classes = "font-extrabold text-4xl lg:text-5xl";
+      classes = "font-bold text-4xl lg:text-5xl";
       break;
     case "h2":
-      classes = "font-extrabold text-2xl lg:text-3xl";
+      classes = "font-semibold text-2xl lg:text-3xl";
       break;
     case "h3":
-      classes = "font-extrabold text-xl";
+      classes = "font-semibold text-xl lg:text-2xl";
       break;
     case "h4":
       classes = "font-bold text-lg";
