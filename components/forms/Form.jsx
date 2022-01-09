@@ -1,13 +1,15 @@
 import { joinClassNames } from "utils/helpers";
 
 function Form({ children, className, ...props }) {
-  const required = children.map((item) => {
-    if (item.type.name === "Input") {
-      Object.keys(item.props).map(function (key) {
-        if (key === "required") return true;
-      });
-    }
-  });
+  // const required = children.map((item) => {
+  //   if (item.type.name === "Input") {
+  //     Object.keys(item.props).map(function (key) {
+  //       if (key === "required") return true;
+  //     });
+  //   }
+  // });
+
+  const required = true;
 
   return (
     <form
