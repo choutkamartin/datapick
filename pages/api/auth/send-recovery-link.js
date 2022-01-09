@@ -1,4 +1,3 @@
-import { sendEmail } from "utils/email";
 import { randomBytes } from "crypto";
 import User from "models/User";
 import dbConnect from "lib/dbConnect";

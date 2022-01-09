@@ -1,5 +1,5 @@
-import { joinClassNames } from "utils/helpers";
 import { ExclamationCircleIcon } from "@heroicons/react/outline";
+import { joinClassNames } from "utils/helpers";
 
 export default function Error({ title, className }) {
   return (

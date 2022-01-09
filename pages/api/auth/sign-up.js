@@ -1,7 +1,7 @@
-import { sendEmail } from "utils/email";
 import { randomBytes } from "crypto";
 import User from "models/User";
 import dbConnect from "lib/dbConnect";
+import { sendEmail } from "utils/email";
 import path from "utils/path";
 
 export default async function handler(req, res) {
