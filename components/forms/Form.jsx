@@ -1,4 +1,6 @@
-export default function Form({ children, ...props }) {
+import { joinClassNames } from "utils/helpers";
+
+function Form({ children, className, ...props }) {
   const required = children.map((item) => {
     if (item.type.name === "Input") {
       Object.keys(item.props).map(function (key) {
@@ -8,11 +10,21 @@ export default function Form({ children, ...props }) {
   });
 
   return (
-    <form className="flex flex-col gap-y-4" {...props}>
+    <form
+      className={joinClassNames("flex flex-col gap-y-4", className)}
+      {...props}
+    >
       {children}
       {required && (
-        <span className="font-semibold text-sm">* Required fields</span>
+        <span className="font-medium text-sm mt-2">* Required fields</span>
       )}
     </form>
   );
 }
+
+function Body({ children }) {
+  return <div className="flex flex-col gap-y-4">{children}</div>;
+}
+
+Form.Body = Body;
+export default Form;
