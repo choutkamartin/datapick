@@ -1,3 +1,4 @@
+// A list of pages and their routes used as an import in the pages folder
 export default {
   index: "/",
   platform: {
