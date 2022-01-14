@@ -14,6 +14,7 @@ export default {
   },
   projects: {
     dashboard: "/projects/dashboard",
+    label: "/projects/label",
   },
   auth: {
     forgotPassword: "/auth/forgot-password",
