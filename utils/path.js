@@ -1,4 +1,4 @@
-// A list of pages and their routes used as an import in the pages folder
+/** A list of paths to specific pages */
 export default {
   index: "/",
   platform: {
@@ -22,6 +22,7 @@ export default {
     signIn: "/auth/sign-in",
     signUp: "/auth/sign-up",
     newUser: "/auth/new-user",
+    setNewPassword: "/auth/set-new-password",
   },
   user: {
     apiKeys: "/user/api-keys",
