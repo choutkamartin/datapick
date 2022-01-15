@@ -1,15 +1,15 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import VerticalLine from "components/VerticalLine";
+import LineVertical from "components/LineVertical";
 import Card from "components/Card";
-import Avatar from "components/avatars/Avatar";
-import Container from "components/layout/Container";
-import UserSidebar from "components/layout/UserSidebar";
-import Error from "components/alerts/Error";
-import Success from "components/alerts/Success";
+import PictureProfile from "components/PictureProfile";
+import Container from "components/Container";
+import PrivateSidebar from "components/layout/private/PrivateSidebar";
+import AlertError from "components/alerts/AlertError";
+import AlertSuccess from "components/alerts/AlertSuccess";
 import NotAuthorized from "components/NotAuthorized";
-import Title from "components/Title";
+import Heading from "components/Heading";
 import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
 import Form from "components/forms/Form";
@@ -20,18 +20,6 @@ const sidebarData = [
   {
     name: "Profile",
     href: path.user.profile,
-  },
-  {
-    name: "Billing Info",
-    href: path.user.billingInfo,
-  },
-  {
-    name: "API keys",
-    href: path.user.apiKeys,
-  },
-  {
-    name: "Team",
-    href: path.user.team,
   },
 ];
 
@@ -65,27 +53,27 @@ function Profile() {
   if (status === "authenticated") {
     return (
       <div className="flex flex-col lg:flex-row">
-        <UserSidebar title="User" data={sidebarData} />
+        <PrivateSidebar title="User" data={sidebarData} />
         <Container variant="box" className="w-full items-center py-24">
           <Card>
             <Card.Head className="flex-col lg:flex-row gap-y-4 gap-x-8 lg:items-center">
-              <Avatar
+              <PictureProfile
                 src={session.user.image}
-                alt="Avatar picture"
+                alt="Profile picture"
                 className="h-12 w-12 ring-white"
               />
               <div>
-                <Title headingLevel="h2" className="text-white">
+                <Heading headingLevel="h2" className="text-white">
                   Hi, {session.user.name}
-                </Title>
+                </Heading>
                 <Paragraph className="text-white">
                   On this page you can edit your profile.
                 </Paragraph>
               </div>
             </Card.Head>
             <Card.Body>
-              {result && <Success title={result.message} className="mb-6" />}
-              {error && <Error title={error.message} className="mb-6" />}
+              {result && <AlertSuccess title={result.message} className="mb-6" />}
+              {error && <AlertError title={error.message} className="mb-6" />}
               <Form className="relative grid lg:grid-cols-2 gap-x-28">
                 <Form.Body>
                   <Input
@@ -108,7 +96,7 @@ function Profile() {
                     required
                   />
                 </Form.Body>
-                <VerticalLine />
+                <LineVertical />
                 <Form.Body>
                   <Input
                     label="Current password"
