@@ -1,9 +1,18 @@
-// Simple helper function that returns a list of classes joined together with a space as a separator
+/**
+ * A helper function for returning a string containing classes separated by spaces
+ * @param  {...any} classes A list of classes
+ * @returns Classes joined together
+ */
 export function joinClassNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// Simple helper function that returns the size of a file in a human readable format
+/**
+ * A helper function that converts bytes to a human readable format
+ * @param {number} bytes A filesize in bytes
+ * @param {number} decimals The number of decimal points the function should output
+ * @returns A filesize in a readable format
+ */
 export function formatBytes(bytes, decimals) {
   if (bytes == 0) return "0 Bytes";
   var k = 1024,
