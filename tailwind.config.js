@@ -5,15 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: {
-          100: "#f2f2f2",
-        },
-      },
+      colors: {},
       backgroundImage: {
-        hero: "url('https://images.unsplash.com/photo-1474314243412-cd4a79f02c6a')",
-        people:
-          "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c')",
+        hero: "url('/images/robot.jpg')",
       },
     },
   },
