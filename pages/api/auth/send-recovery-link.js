@@ -1,11 +1,14 @@
 import { randomBytes } from "crypto";
 import User from "models/User";
 import dbConnect from "lib/dbConnect";
+import { sendRecoveryEmail } from "utils/email";
+import path from "utils/path";
 
 export default async function handler(req, res) {
   await dbConnect();
   const { email } = req.body;
   const url = process.env.NEXTAUTH_URL;
+  const { setNewPassword } = path.auth;
   const recoveryToken = randomBytes(8).toString("hex");
   const user = await User.findOne({ email: email });
   var currentDate = new Date();
@@ -17,7 +20,10 @@ export default async function handler(req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+      const recoveryLink = `${url}${setNewPassword}?token=${recoveryToken}`;
+      sendRecoveryEmail(email, recoveryLink).then((response) => {
+        res.json(response);
+      });
     }
   });
 }

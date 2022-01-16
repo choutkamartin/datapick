@@ -6,6 +6,5 @@ export default async function handler(req, res) {
   const { projectId } = req.query;
   const data = req.body;
   const project = await Project.findByIdAndUpdate(projectId, { data: data });
-  console.log(project);
   res.json(req.body);
 }
