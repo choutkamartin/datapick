@@ -1,6 +1,6 @@
 import { joinClassNames } from "utils/helpers";
 
-export default function VerticalLine({ className }) {
+export default function LineVertical({ className }) {
   return (
     <div
       className={joinClassNames(
