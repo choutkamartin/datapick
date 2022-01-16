@@ -1,67 +1,59 @@
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { XIcon } from "@heroicons/react/outline";
-import Title from "components/Title";
-import Anchor from "components/links/Anchor";
+import Heading from "components/Heading";
+import Anchor from "components/Anchor";
 import Button from "components/buttons/Button";
-import { useState } from "react";
-import Error from "components/alerts/Error";
+import AlertError from "components/alerts/AlertError";
 import Card from "components/Card";
 import Paragraph from "components/Paragraph";
-import FileInput from "components/inputs/FileInput";
-import VerticalLine from "components/VerticalLine";
+import InputFile from "components/inputs/InputFile";
+import LineVertical from "components/LineVertical";
 import NotAuthorized from "components/NotAuthorized";
-import UserSidebar from "components/layout/UserSidebar";
+import PrivateSidebar from "components/layout/private/PrivateSidebar";
 import Form from "components/forms/Form";
-import Container from "components/layout/Container";
+import Container from "components/Container";
 import { formatBytes } from "utils/helpers";
 import path from "utils/path";
 
-function NewProject() {
+function UploadData() {
   const router = useRouter();
   const { id } = router.query;
   const { data: session, status } = useSession();
+  const [error, setError] = useState(null);
   const [filesSelected, setFilesSelected] = useState([]);
-  const [files, setFiles] = useState();
-  const [uploadedFile, setUploadedFile] = useState([]);
+  const [filesUploaded, setFilesUploaded] = useState([]);
 
-  const changeHandler = (event) => {
-    setFilesSelected(event.target.files);
+  const changeHandler = (e) => {
+    setFilesSelected(e.target.files);
   };
 
-  const listObjects = async () => {
-    const res = await fetch(
-      `/api/s3/list-objects?prefix=${session.user.email}/${id}/`
-    );
-    const data = await res.json();
-    if (data.Contents) {
-      const loop = data.Contents.map((item) => {
-        item.Name = item.Key.substr(item.Key.lastIndexOf("/") + 1);
-        return item;
-      });
-      setFiles(loop);
-    }
-  };
-
-  const handleSubmission = async () => {
-    const loop = [];
+  const createPost = async () => {
+    const filesSelectedArray = [];
     Array.from(filesSelected).forEach((item) => {
-      loop.push({ name: item.name, size: item.name });
+      const key = `${session.user._id}/${id}/${encodeURIComponent(item.name)}`;
+      filesSelectedArray.push({ name: item.name, key: key, size: item.size });
     });
     const res = await fetch(`/api/s3/create-post?user=${session.user.email}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(loop),
+      body: JSON.stringify(filesSelectedArray),
     });
-    const data = await res.json();
-    const fileArr = [];
+    return await res.json();
+  };
 
+  const uploadToS3 = async (data) => {
+    const filesArray = [];
     for (const item of data) {
       for (var i = 0; i < filesSelected.length; i++) {
         const file = filesSelected[i];
-        if (item.fields.key === file.name) {
+        const key = `${session.user._id}/${id}/${encodeURIComponent(
+          file.name
+        )}`;
+        if (item.fields.key === key) {
           const { url, fields } = item;
           const formData = new FormData();
           Object.entries({ ...fields, file }).forEach(([key, value]) => {
@@ -72,25 +64,28 @@ function NewProject() {
             body: formData,
           });
           if (upload.ok) {
-            fileArr.push({ name: file.name, size: file.size });
-            console.log("Uploaded successfully!");
+            filesArray.push({ name: file.name, key: key, size: file.size });
+            return filesArray;
           } else {
-            console.error("Upload failed.");
+            setError("An error occured when uploading the files to S3.");
           }
         }
       }
     }
-    setUploadedFile((uploadedFile) => [...uploadedFile, ...fileArr]);
+  };
+
+  const handleSubmission = async () => {
+    const data = await createPost();
+    const filesArray = await uploadToS3(data);
+    setFilesUploaded((filesUploaded) => [...filesUploaded, ...filesArray]);
     await fetch(`/api/projects/upload-data?projectId=${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(fileArr),
+      body: JSON.stringify(filesArray),
     });
   };
-
-  const [error, setError] = useState(null);
 
   const sidebarData = [
     {
@@ -102,48 +97,43 @@ function NewProject() {
   if (status === "authenticated") {
     return (
       <div className="flex flex-col lg:flex-row">
-        <UserSidebar title="Projects" data={sidebarData} />
+        <PrivateSidebar title="Projects" data={sidebarData} />
         <Container variant="box" className="w-full items-center py-32">
           <Card>
             <Card.Head className="flex flex-col">
-              <Title headingLevel="h2" className="text-white mb-3">
+              <Heading headingLevel="h2" className="text-white mb-3">
                 Upload Data
-              </Title>
+              </Heading>
               <Paragraph className="text-white">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos
-                nam rem sapiente suscipit repellat autem laboriosam culpa
-                mollitia corporis ducimus libero accusantium est, aut aspernatur
-                quae iste perspiciatis veritatis illum?
+                Upload images you wish to label in your project.
               </Paragraph>
             </Card.Head>
             <Card.Body>
-              {error && <Error title={error} className="mb-6" />}
+              {error && <AlertError title={error} className="mb-6" />}
               <div className="relative grid grid-cols-2 gap-x-36">
                 <Form>
                   <Form.Body className="flex flex-col gap-y-8">
-                    <FileInput
+                    <InputFile
                       title="Upload files"
                       onChange={changeHandler}
                       multiple
                       accept="image/png, image/jpeg"
                     />
                     {filesSelected.length != 0 && (
-                      <Button
-                        type="button"
-                        onClick={handleSubmission}
-                      >
+                      <Button type="button" onClick={handleSubmission}>
                         Upload
                       </Button>
                     )}
                   </Form.Body>
                 </Form>
-                <VerticalLine />
+                <LineVertical />
                 <div>
-                  <Title headingLevel="h4">Uploaded data</Title>
+                  <Heading headingLevel="h4">Uploaded data</Heading>
                   <Paragraph>
-                    Below you can find your uploaded data, which you can delete.
+                    Below you can find your uploaded files. You can delete also
+                    delete the uploaded files.
                   </Paragraph>
-                  {uploadedFile.length != 0 ? (
+                  {filesUploaded.length != 0 ? (
                     <div className="rounded-md overflow-hidden border border-gray-300 mt-4 overflow-x-auto">
                       <table className="min-w-full divide-y">
                         <thead className="bg-gray-50">
@@ -166,7 +156,7 @@ function NewProject() {
                           </tr>
                         </thead>
                         <tbody className="bg-white overflow-hidden divide-y">
-                          {uploadedFile.map((item) => {
+                          {filesUploaded.map((item) => {
                             return (
                               <tr key={item.name}>
                                 <td className="px-6 py-4 whitespace-nowrap">
@@ -217,5 +207,5 @@ function NewProject() {
   return <NotAuthorized />;
 }
 
-NewProject.layout = "Private";
-export default NewProject;
+UploadData.layout = "Private";
+export default UploadData;
