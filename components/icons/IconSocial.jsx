@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Social({ to, icon }) {
+export default function IconSocial({ to, icon }) {
   return (
     <a
       href={to}
