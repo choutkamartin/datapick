@@ -2,18 +2,18 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import Title from "components/Title";
+import Heading from "components/Heading";
 import Button from "components/buttons/Button";
 import Input from "components/inputs/Input";
 import Form from "components/forms/Form";
-import VerticalLine from "components/VerticalLine";
+import LineVertical from "components/LineVertical";
 import Paragraph from "components/Paragraph";
 import Select from "components/inputs/Select";
-import Error from "components/alerts/Error";
+import AlertError from "components/alerts/AlertError";
 import TextArea from "components/inputs/TextArea";
 import Card from "components/Card";
-import UserSidebar from "components/layout/UserSidebar";
-import Container from "components/layout/Container";
+import PrivateSidebar from "components/layout/private/PrivateSidebar";
+import Container from "components/Container";
 import path from "utils/path";
 
 const sidebarData = [
@@ -43,7 +43,7 @@ function NewProject() {
     });
     if (response.ok) {
       const { _id } = await response.json();
-      router.push(`/projects/upload-data?id=${_id}`);
+      router.push(`${path.projects.uploadData}?id=${_id}`);
     } else {
       const test = await response.json();
       setError(test.error);
@@ -52,15 +52,15 @@ function NewProject() {
 
   if (status === "authenticated") {
     return (
-      <div className="flex flex-col lg:flex-row min-h-screen">
-        <UserSidebar title="Projects" data={sidebarData} />
-        <Container variant="box" className="w-full items-center">
+      <div className="flex flex-col lg:flex-row">
+        <PrivateSidebar title="Projects" data={sidebarData} />
+        <Container variant="box" className="items-center py-32">
           <Card>
             <Card.Head>
               <div className="flex flex-col">
-                <Title headingLevel="h2" className="text-white mb-3">
+                <Heading headingLevel="h2" className="text-white mb-3">
                   New Project
-                </Title>
+                </Heading>
                 <Paragraph className="text-white">
                   Create a new project. Think of a unique descriptive project
                   name. You can also specify a description. Select a project
@@ -69,7 +69,7 @@ function NewProject() {
               </div>
             </Card.Head>
             <Card.Body>
-              {error && <Error title={error} className="mb-6" />}
+              {error && <AlertError title={error} className="mb-6" />}
               <div className="relative grid md:grid-cols-2 gap-x-48">
                 <Form onSubmit={handleSubmit(onSubmit)}>
                   <Input
@@ -100,7 +100,7 @@ function NewProject() {
                   </Select>
                   <Button type="submit">Create project</Button>
                 </Form>
-                <VerticalLine />
+                <LineVertical />
               </div>
             </Card.Body>
           </Card>
