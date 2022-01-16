@@ -1,7 +1,7 @@
-import Container from "components/layout/Container";
-import Title from "components/Title";
+import Container from "components/Container";
+import Title from "components/Heading";
 import Paragraph from "components/Paragraph";
-import Anchor from "components/links/Anchor";
+import Anchor from "components/Anchor";
 
 export default function NotAuthorized() {
   return (
