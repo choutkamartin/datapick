@@ -1,8 +1,13 @@
 import { joinClassNames } from "utils/helpers";
 
-function Card({ children }) {
+function Card({ children, className }) {
   return (
-    <div className="bg-white w-full rounded-md overflow-hidden shadow-md">
+    <div
+      className={joinClassNames(
+        "w-full rounded-lg overflow-hidden shadow-md",
+        className
+      )}
+    >
       {children}
     </div>
   );
@@ -10,14 +15,19 @@ function Card({ children }) {
 
 function Head({ children, className }) {
   return (
-    <div className={joinClassNames("px-4 lg:px-16 py-8 flex bg-indigo-700", className)}>
+    <div
+      className={joinClassNames(
+        "px-4 lg:px-16 py-8 flex bg-indigo-700",
+        className
+      )}
+    >
       {children}
     </div>
   );
 }
 
 function Body({ children }) {
-  return <div className="px-4 py-8 lg:p-16 relative">{children}</div>;
+  return <div className="bg-white px-4 py-8 lg:p-16 relative">{children}</div>;
 }
 
 function Footer({ children }) {
