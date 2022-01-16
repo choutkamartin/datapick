@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ArrowCircleUpIcon } from "@heroicons/react/outline";
 import { Transition } from "@headlessui/react";
 
-const ScrollButton = () => {
+const ButtonScroll = () => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
@@ -48,4 +48,4 @@ const ScrollButton = () => {
   );
 };
 
-export default ScrollButton;
+export default ButtonScroll;
