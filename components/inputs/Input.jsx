@@ -19,6 +19,9 @@ export default function Input({
 }) {
   const [mutableType, setMutableType] = useState(type);
 
+  /**
+   * A function, setting the input type text or password based on the current already mutated type.
+   */
   function setPasswordVisibility() {
     if (mutableType === "password") {
       setMutableType("text");
