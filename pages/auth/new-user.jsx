@@ -28,7 +28,7 @@ function NewUser({ user, error }) {
         await signIn("credentials", {
           email: data.email,
           password: data.password,
-          callbackUrl: "http://localhost:3000/user/profile",
+          callbackUrl: "/user/profile",
         });
       } else {
       }
