@@ -16,6 +16,9 @@ export default {
   projects: {
     dashboard: "/projects/dashboard",
     label: "/projects/label",
+    newProject: "/projects/new-project",
+    uploadData: "/projects/upload-data",
+    taxonomy: "/projects/taxonomy",
   },
   auth: {
     forgotPassword: "/auth/forgot-password",
