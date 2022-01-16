@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
-import VerticalLine from "components/VerticalLine";
 import Input from "components/inputs/Input";
-import Title from "components/Title";
+import Heading from "components/Heading";
 import Button from "components/buttons/Button";
-import Container from "components/layout/Container";
-import Card from "components/layout/Card";
+import Container from "components/Container";
+import Card from "components/Card";
 
 function ForgotPassword() {
   const {
@@ -25,13 +24,13 @@ function ForgotPassword() {
   return (
     <Container
       variant="box"
-      className="lg:bg-hero lg:bg-center lg:bg-cover lg:bg-gray-600 lg:bg-blend-multiply py-8 lg:py-36"
+      className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
     >
-      <Card className="w-full bg-white lg:border mx-auto lg:w-full">
-        <Title headingLevel="h2" className="mb-8">
-          Forgot Password
-        </Title>
-        <div className="relative grid md:grid-cols-2 gap-x-36 gap-y-8">
+      <Card className="w-full mx-auto lg:w-6/12">
+        <Card.Head className="text-white">
+          <Heading headingLevel="h2">Forgot Password</Heading>
+        </Card.Head>
+        <Card.Body>
           <form
             className="flex flex-col gap-y-4"
             onSubmit={handleSubmit(onSubmit)}
@@ -46,9 +45,7 @@ function ForgotPassword() {
             />
             <Button type="submit">Continue</Button>
           </form>
-          <VerticalLine />
-          <div className="w-full h-48 lg:h-72 bg-gray-300 rounded bg-people bg-cover bg-blend-multiply bg-center"></div>
-        </div>
+        </Card.Body>
       </Card>
     </Container>
   );
