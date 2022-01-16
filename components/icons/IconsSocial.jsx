@@ -3,7 +3,7 @@ import {
   faGithubAlt,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import Social from "components/links/Social";
+import Social from "components/icons/IconSocial";
 import path from "utils/path";
 
 const socialIcons = [
@@ -24,7 +24,7 @@ const socialIcons = [
   },
 ];
 
-export default function SocialIcons() {
+export default function IconsSocial() {
   return socialIcons.map((item) => {
     return <Social key={item.name} to={item.href} icon={item.icon} />;
   });
