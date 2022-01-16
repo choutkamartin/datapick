@@ -79,9 +79,9 @@ function Taxonomy() {
   ];
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen">
+    <div className="flex flex-col lg:flex-row">
       <PrivateSidebar title="Projects" data={sidebarData} />
-      <Container variant="box" className="py-32">
+      <Container variant="box" className="items-center py-32">
         <Card>
           <Card.Head className="flex-col">
             <Heading headingLevel="h2" className="text-white mb-3">
