@@ -47,7 +47,7 @@ export default function ButtonsOAuth() {
         icon={item.icon}
         onClick={() =>
           signIn(item.provider, {
-            callbackUrl: "http://localhost:3000/user/profile",
+            callbackUrl: "/user/profile",
           })
         }
       />
