@@ -2,10 +2,10 @@ import { Fragment } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
 import { XIcon, MenuIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import Anchor from "components/links/Anchor";
+import Anchor from "components/Anchor";
 import path from "utils/path";
 
-export default function MobileMenu({ solutions, additionalLinks }) {
+export default function MenuMobile({ solutions, additionalLinks }) {
   return (
     <Popover className="lg:hidden">
       {({ open }) => (
