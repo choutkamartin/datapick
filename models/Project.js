@@ -21,9 +21,14 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      completed: {
+      key: {
+        type: String,
+        required: true,
+      },
+      done: {
         type: Boolean,
       },
+      data: [],
     },
   ],
   author: {
