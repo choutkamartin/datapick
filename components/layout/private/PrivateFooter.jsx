@@ -1,8 +1,8 @@
-import VerticalLine from "components/VerticalLine";
-import Anchor from "components/links/Anchor";
-import Title from "components/Title";
-import SocialIcons from "components/links/SocialIcons";
-import Logo from "components/logos/Logo";
+import VerticalLine from "components/LineVertical";
+import Anchor from "components/Anchor";
+import Title from "components/Heading";
+import SocialIcons from "components/icons/IconsSocial";
+import Logo from "components/LogoBrand";
 import path from "utils/path";
 
 const footer = [
@@ -58,7 +58,7 @@ const footer = [
   },
 ];
 
-export default function Footer() {
+export default function PrivateFooter() {
   return (
     <footer className="bg-white border-t py-12 px-4 md:px-8 lg:px-20 xl:px-40 2xl:px-14">
       <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-x-64 gap-y-8">
