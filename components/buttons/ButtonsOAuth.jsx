@@ -5,8 +5,11 @@ import {
   faGoogle,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import OAuthButton from "components/buttons/OAuthButton";
+import OAuthButton from "components/buttons/ButtonOAuth";
 
+/**
+ * A list of the OAuth providers
+ */
 const oAuthProviders = [
   {
     title: "Facebook",
@@ -34,7 +37,7 @@ const oAuthProviders = [
   },
 ];
 
-export default function OAuthButtons() {
+export default function ButtonsOAuth() {
   return oAuthProviders.map((item) => {
     return (
       <OAuthButton
