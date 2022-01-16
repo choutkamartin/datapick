@@ -1,12 +1,6 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import {
-  BookmarkAltIcon,
-  CalendarIcon,
-  CursorClickIcon,
-  ShieldCheckIcon,
-  SupportIcon,
-  ViewGridIcon,
   UserGroupIcon,
   PhotographIcon,
   DocumentTextIcon,
@@ -15,10 +9,10 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
-import Anchor from "components/links/Anchor";
-import Logo from "components/logos/Logo";
-import MobileMenu from "components/layout/MobileMenu";
-import AccountMenu from "components/layout/AccountMenu";
+import Anchor from "components/Anchor";
+import Logo from "components/LogoBrand";
+import MobileMenu from "components/MenuMobile";
+import AccountMenu from "components/MenuAccount";
 import { joinClassNames } from "utils/helpers";
 import path from "utils/path";
 
@@ -39,7 +33,6 @@ const solutions = [
   {
     name: "Platform",
     description: "Our platform",
-    icon: PhotographIcon,
     children: [
       {
         name: "Image annotation",
@@ -78,49 +71,13 @@ const solutions = [
         icon: UserGroupIcon,
       },
     ],
-    href: "/solutions",
-    icon: CursorClickIcon,
-  },
-  {
-    name: "Resources",
-    description: "A place to learn about Datapick",
-    href: "/resources",
-    icon: ViewGridIcon,
   },
 ];
 
-const resources = [
-  {
-    name: "Help Center",
-    description:
-      "Get all of your questions answered in our forums or contact support.",
-    href: "#",
-    icon: SupportIcon,
-  },
-  {
-    name: "Guides",
-    description:
-      "Learn how to maximize our platform to get the most out of it.",
-    href: "#",
-    icon: BookmarkAltIcon,
-  },
-  {
-    name: "Events",
-    description:
-      "See what meet-ups and other events we might be planning near you.",
-    href: "#",
-    icon: CalendarIcon,
-  },
-  {
-    name: "Security",
-    description: "Understand how we take your privacy seriously.",
-    href: "#",
-    icon: ShieldCheckIcon,
-  },
-];
+const resources = [];
 const recentPosts = [{ id: 1, name: "Test Post", href: "/blog/test-post" }];
 
-export default function Header() {
+export default function PublicHeader() {
   const { data: session, status } = useSession();
   return (
     <Popover className="relative bg-white shadow">
