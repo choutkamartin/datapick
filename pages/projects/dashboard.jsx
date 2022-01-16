@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { format } from "date-fns";
-import Anchor from "components/links/Anchor";
+import Link from "next/link";
+import Anchor from "components/Anchor";
+import PrivateSidebar from "components/layout/private/PrivateSidebar";
 import path from "utils/path";
-import UserSidebar from "components/layout/UserSidebar";
+import NotAuthorized from "components/NotAuthorized";
 
 const sidebarData = [
   {
@@ -52,7 +54,7 @@ function Dashboard() {
   if (status === "authenticated") {
     return (
       <div className="flex flex-col lg:flex-row min-h-screen">
-        <UserSidebar title="Projects" data={sidebarData} />
+        <PrivateSidebar title="Projects" data={sidebarData} />
         <div className="xl:px-24 2xl:px-60 py-20 w-full">
           <div className="flex flex-col mb-4">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -116,9 +118,8 @@ function Dashboard() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {
-                              item.data.filter(
-                                (object) => object.completed === true
-                              ).length
+                              item.data.filter((object) => object.done === true)
+                                .length
                             }
                             /{item.data.length}
                           </td>
@@ -126,12 +127,18 @@ function Dashboard() {
                             {state(item)}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <a
-                              href="#"
-                              className="text-indigo-600 hover:text-indigo-900"
+                            <Link href="#">
+                              <a className="text-indigo-600 hover:text-indigo-900 mr-6">
+                                Edit
+                              </a>
+                            </Link>
+                            <Link
+                              href={`${path.projects.label}?id=${item._id}`}
                             >
-                              Edit
-                            </a>
+                              <a className="text-indigo-600 hover:text-indigo-900">
+                                Label
+                              </a>
+                            </Link>
                           </td>
                         </tr>
                       ))}
@@ -149,7 +156,7 @@ function Dashboard() {
     );
   }
 
-  return <div></div>;
+  return <NotAuthorized />;
 }
 
 Dashboard.layout = "Private";
