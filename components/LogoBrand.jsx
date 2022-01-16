@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Anchor from "components/links/Anchor";
+import Anchor from "components/Anchor";
 
-export default function Logo() {
+export default function LogoBrand() {
   return (
     <Anchor to="/" type="link">
       <span className="sr-only">Datapick</span>
