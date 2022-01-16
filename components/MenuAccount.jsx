@@ -2,10 +2,10 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import Avatar from "components/avatars/Avatar";
+import Avatar from "components/PictureProfile";
 import path from "utils/path";
 
-export default function AccountMenu() {
+export default function MenuAccount() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
