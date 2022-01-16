@@ -5,10 +5,10 @@ import {
   PresentationChartBarIcon,
   UserCircleIcon,
 } from "@heroicons/react/outline";
-import Anchor from "components/links/Anchor";
-import Logo from "components/logos/Logo";
-import MobileMenu from "components/layout/MobileMenu";
-import AccountMenu from "components/layout/AccountMenu";
+import Anchor from "components/Anchor";
+import Logo from "components/LogoBrand";
+import MobileMenu from "components/MenuMobile";
+import AccountMenu from "components/MenuAccount";
 import { joinClassNames } from "utils/helpers";
 import path from "utils/path";
 
@@ -38,7 +38,7 @@ const solutions = [
   },
 ];
 
-export default function UserHeader() {
+export default function PrivateHeader() {
   return (
     <Popover className="relative bg-white border-b">
       <div className="px-4 md:px-8 lg:px-14">
