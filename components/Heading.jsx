@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { joinClassNames } from "utils/helpers";
 
-export default function Title({ children, headingLevel, className }) {
+export default function Heading({ children, headingLevel, className }) {
   const validHeadingLevels = ["h1", "h2", "h3", "h4", "h5", "h6"];
   const safeHeading = headingLevel ? headingLevel.toLowerCase() : "";
   const level = validHeadingLevels.includes(safeHeading) ? safeHeading : "p";
