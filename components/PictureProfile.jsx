@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { joinClassNames } from "utils/helpers";
 
-export default function Avatar({ src, className, alt }) {
+export default function PictureProfile({ src, className, alt }) {
   return (
     <div
       className={joinClassNames(
