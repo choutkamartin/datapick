@@ -1,16 +1,16 @@
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import VerticalLine from "components/VerticalLine";
+import LineVertical from "components/LineVertical";
 import Input from "components/inputs/Input";
-import Title from "components/Title";
+import Heading from "components/Heading";
 import Button from "components/buttons/Button";
-import Anchor from "components/links/Anchor";
-import Error from "components/alerts/Error";
+import Anchor from "components/Anchor";
+import AlertError from "components/alerts/AlertError";
 import Form from "components/forms/Form";
-import OAuthButtons from "components/buttons/OAuthButtons";
-import Card from "components/layout/Card";
-import Container from "components/layout/Container";
+import ButtonsOAuth from "components/buttons/ButtonsOAuth";
+import Card from "components/Card";
+import Container from "components/Container";
 import path from "utils/path";
 
 const authErrors = {
@@ -48,43 +48,45 @@ function SignIn() {
   return (
     <Container
       variant="box"
-      className="lg:bg-hero lg:bg-center lg:bg-cover lg:bg-gray-600 lg:bg-blend-multiply py-8 lg:py-36"
+      className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
     >
-      <Card className="bg-white lg:border mx-auto">
-        <Title headingLevel="h2" className="mb-8">
-          Sign In
-        </Title>
-        {error && <Error title={errorMessage} className="mb-6" />}
-        <div className="relative grid md:grid-cols-2 gap-x-36 gap-y-8">
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              label="E-mail address"
-              id="email"
-              type="text"
-              register={register}
-              errors={errors.email}
-              required
-            />
-            <Input
-              label="Password"
-              id="password"
-              type="password"
-              register={register}
-              errors={errors.password}
-              required
-            />
-            <Button type="submit">Continue</Button>
-            <Anchor to={path.auth.forgotPassword} type="link">
-              Forgot password?
-            </Anchor>
-          </Form>
-          <VerticalLine />
-          <div className="text-center">
-            <div className="flex flex-col items-center gap-y-4">
-              <OAuthButtons />
+      <Card className="lg:w-8/12 mx-auto">
+        <Card.Head className="text-white">
+          <Heading headingLevel="h2">Sign In</Heading>
+        </Card.Head>
+        <Card.Body>
+          {error && <AlertError title={errorMessage} className="mb-6" />}
+          <div className="relative grid md:grid-cols-2 gap-x-36 gap-y-8">
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <Input
+                label="E-mail address"
+                id="email"
+                type="text"
+                register={register}
+                errors={errors.email}
+                required
+              />
+              <Input
+                label="Password"
+                id="password"
+                type="password"
+                register={register}
+                errors={errors.password}
+                required
+              />
+              <Button type="submit">Continue</Button>
+              <Anchor to={path.auth.forgotPassword} type="link">
+                Forgot password?
+              </Anchor>
+            </Form>
+            <LineVertical />
+            <div className="text-center">
+              <div className="flex flex-col items-center gap-y-4">
+                <ButtonsOAuth />
+              </div>
             </div>
           </div>
-        </div>
+        </Card.Body>
       </Card>
     </Container>
   );
