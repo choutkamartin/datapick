@@ -1,20 +1,15 @@
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import {
-  UserGroupIcon,
-  PhotographIcon,
-  DocumentTextIcon,
-  VolumeUpIcon,
-  VideoCameraIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/outline";
+import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import Anchor from "components/Anchor";
 import Logo from "components/LogoBrand";
-import MobileMenu from "components/MenuMobile";
-import AccountMenu from "components/MenuAccount";
+import MenuMobile from "components/MenuMobile";
+import MenuAccount from "components/MenuAccount";
 import { joinClassNames } from "utils/helpers";
 import path from "utils/path";
+import { faRobot, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const additionalLinks = [
   {
@@ -33,42 +28,39 @@ const solutions = [
   {
     name: "Platform",
     description: "Our platform",
+    icon: faRobot,
     children: [
       {
         name: "Image annotation",
         description: "Image annotations",
         href: path.platform.audioAnnotation,
-        icon: PhotographIcon,
       },
       {
         name: "Text annotation",
         description: "Text annotations",
         href: path.platform.textAnnotation,
-        icon: DocumentTextIcon,
       },
       {
         name: "Audio annotation",
         description: "Audio annotations",
         href: path.platform.audioAnnotation,
-        icon: VolumeUpIcon,
       },
       {
         name: "Video annotation",
         description: "Video annotations",
         href: path.platform.videoAnnotation,
-        icon: VideoCameraIcon,
       },
     ],
   },
   {
     name: "Company",
     description: "Our solutions for machine learning",
+    icon: faUsers,
     children: [
       {
         name: "About Us",
         description: "Our company",
         href: path.company.aboutUs,
-        icon: UserGroupIcon,
       },
     ],
   },
@@ -86,7 +78,7 @@ export default function PublicHeader() {
           <div className="flex justify-start">
             <Logo />
           </div>
-          <MobileMenu solutions={solutions} additionalLinks={additionalLinks} />
+          <MenuMobile solutions={solutions} additionalLinks={additionalLinks} />
           <Popover.Group as="nav" className="hidden lg:flex space-x-10">
             {solutions.map((item) =>
               item.children != undefined ? (
@@ -127,7 +119,8 @@ export default function PublicHeader() {
                                   href={item.href}
                                   className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                                 >
-                                  <item.icon
+                                  <FontAwesomeIcon
+                                    icon={item.icon}
                                     className="flex-shrink-0 h-6 w-6 text-indigo-600"
                                     aria-hidden="true"
                                   />
@@ -264,7 +257,7 @@ export default function PublicHeader() {
               );
             })}
             {status === "authenticated" ? (
-              <AccountMenu />
+              <MenuAccount />
             ) : (
               <>
                 <Anchor
