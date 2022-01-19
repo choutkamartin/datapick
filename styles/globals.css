@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,8 +7,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Karla", sans-serif;
 }
 
 a {
@@ -17,4 +17,73 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.label {
+  display: grid;
+  grid-template-areas:
+    "sidebar-left toolbar sidebar-right"
+    "sidebar-left image sidebar-right";
+  grid-template-rows: 1fr 16fr;
+  grid-template-columns: 1fr 16fr 4fr;
+}
+
+.toolbar {
+  grid-area: toolbar;
+}
+.sidebar-left {
+  grid-area: sidebar-left;
+}
+.sidebar-right {
+  grid-area: sidebar-right;
+}
+.image {
+  grid-area: image;
+}
+
+rect {
+  cursor: crosshair;
+}
+img {
+  display: block;
+}
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 10rem;
+  height: 100vh;
+}
+.box {
+  position: relative;
+}
+.svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.polygon {
+  fill: rgba(255, 0, 0, 0.1);
+  stroke: #dc2626;
+  cursor: crosshair;
+  stroke-width: 1;
+}
+.panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: flex-start;
+  gap: 16px;
+}
+.object {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border: 1px solid;
+  padding: 16px;
+}
+.data {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
