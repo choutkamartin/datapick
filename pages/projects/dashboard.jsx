@@ -60,97 +60,114 @@ function Dashboard() {
         {loading === true ? (
           <SpinnerLoad />
         ) : (
-          <div className="flex flex-col mb-4">
-            <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          Project Name
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          Type
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          Date
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          Progress
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                          State
-                        </th>
-                        <th scope="col" className="relative px-6 py-3">
-                          <span className="sr-only">Edit</span>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {projects.map((item) => (
-                        <tr key={item.name}>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm font-medium text-gray-900">
-                              {item.name}
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {item.type}
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-sm text-gray-900">
-                              {format(new Date(item.date), "dd.MM.yyyy")}
-                            </div>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {
-                              item.data.filter((object) => object.done === true)
-                                .length
-                            }
-                            /{item.data.length}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {state(item)}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <Link href="#">
-                              <a className="text-indigo-600 hover:text-indigo-900 mr-6">
-                                Edit
-                              </a>
-                            </Link>
-                            <Link
-                              href={`${path.projects.label}?id=${item._id}`}
-                            >
-                              <a className="text-indigo-600 hover:text-indigo-900">
-                                Label
-                              </a>
-                            </Link>
-                          </td>
+          <div className="flex flex-col items-start gap-4 mb-4">
+            {projects.length != 0 ? (
+              <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-full">
+                <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                  <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded">
+                    <table className="min-w-full divide-y divide-gray-200">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Project Name
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Type
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Date
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Progress
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            State
+                          </th>
+                          <th scope="col" className="relative px-6 py-3">
+                            <span className="sr-only">Edit</span>
+                          </th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {projects.map((item) => (
+                          <tr key={item.name}>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm font-medium text-gray-900">
+                                {item.name}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm text-gray-900">
+                                {item.type}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm text-gray-900">
+                                {format(new Date(item.date), "dd.MM.yyyy")}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              {
+                                item.data.filter(
+                                  (object) => object.done === true
+                                ).length
+                              }
+                              /{item.data.length}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              {state(item)}
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                              <Link href="#">
+                                <a className="text-indigo-600 hover:text-indigo-900 mr-6">
+                                  Edit
+                                </a>
+                              </Link>
+                              {item.data.filter(
+                                (object) => object.done === true
+                              ).length === item.data.length ? (
+                                <Link
+                                  href={`/api/projects/get-data?id=${item._id}`}
+                                >
+                                  <a className="text-indigo-600 hover:text-indigo-900">
+                                    Get data
+                                  </a>
+                                </Link>
+                              ) : (
+                                <Link
+                                  href={`${path.projects.label}?id=${item._id}`}
+                                >
+                                  <a className="text-indigo-600 hover:text-indigo-900">
+                                    Label
+                                  </a>
+                                </Link>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="mt-4 font-semibold">You have no projects.</div>
+            )}
             <Anchor to="/projects/new-project" type="button" variant="primary">
               Create project
             </Anchor>
