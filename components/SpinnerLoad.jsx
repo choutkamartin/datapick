@@ -5,7 +5,7 @@ export default function SpinnerLoad() {
   return (
     <FontAwesomeIcon
       icon={faSpinner}
-      className="animate-spin text-indigo-600"
+      className="block animate-spin text-indigo-600"
       size="3x"
     />
   );
