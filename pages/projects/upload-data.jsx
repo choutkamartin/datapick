@@ -207,5 +207,6 @@ function UploadData() {
   return <NotAuthorized />;
 }
 
+UploadData.auth = true;
 UploadData.layout = "Private";
 export default UploadData;

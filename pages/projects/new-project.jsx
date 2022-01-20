@@ -112,5 +112,6 @@ function NewProject() {
   return <div></div>;
 }
 
+NewProject.auth = true;
 NewProject.layout = "Private";
 export default NewProject;

@@ -194,5 +194,6 @@ function Taxonomy() {
   );
 }
 
+Taxonomy.auth = true;
 Taxonomy.layout = "Private";
 export default Taxonomy;

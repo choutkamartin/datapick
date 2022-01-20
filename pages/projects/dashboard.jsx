@@ -159,5 +159,6 @@ function Dashboard() {
   return <NotAuthorized />;
 }
 
+Dashboard.auth = true;
 Dashboard.layout = "Private";
 export default Dashboard;
