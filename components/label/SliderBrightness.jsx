@@ -13,7 +13,7 @@ export default function SliderBrightness({ value, setValue }) {
         <SunIcon className="h-6 w-6 text-white" />
       </button>
       {visible && (
-        <div className="absolute mt-4 p-2 bg-white flex items-center py-5 rounded-sm shadow">
+        <div className="absolute mt-4 p-2 bg-white flex items-center py-5 rounded-sm shadow z-10">
           <input
             type="range"
             min="0"
