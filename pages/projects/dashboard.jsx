@@ -142,7 +142,7 @@ function Dashboard() {
                                 (object) => object.done === true
                               ).length === item.data.length ? (
                                 <Link
-                                  href={`/api/projects/get-data?id=${item._id}`}
+                                  href={`/projects/get-data?id=${item._id}`}
                                 >
                                   <a className="text-indigo-600 hover:text-indigo-900">
                                     Get data
