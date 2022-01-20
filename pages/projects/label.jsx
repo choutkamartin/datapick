@@ -127,5 +127,6 @@ function Label({ data }) {
   }
 }
 
+Label.auth = true;
 Label.layout = "Label";
 export default Label;
