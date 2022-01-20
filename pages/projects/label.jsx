@@ -47,7 +47,7 @@ function Label({ data }) {
   }
 
   async function setCompleted() {
-    const response = saveDatabase();
+    const response = await saveDatabase();
 
     if (response.ok) {
       router.push(path.projects.dashboard);
@@ -69,7 +69,9 @@ function Label({ data }) {
     saveData();
   }
 
-  function saveData() {}
+  function saveData() {
+    saveDatabase();
+  }
 
   const getNextImage = useCallback(() => {
     const image = project.data.find((item) => item.done != true);
@@ -105,10 +107,11 @@ function Label({ data }) {
     return (
       <div className="label bg-slate-100 h-screen">
         <LabelToolbar />
-        <LabelSidebarLeft setBrightness={setBrightness} brightness={brightness} />
-        <div className="p-16 overflow-auto">
-          {conditional()}
-        </div>
+        <LabelSidebarLeft
+          setBrightness={setBrightness}
+          brightness={brightness}
+        />
+        <div className="p-16">{conditional()}</div>
         <div>{error && <AlertError title={error} className="mb-6" />}</div>
         <LabelSidebarRight
           annotations={annotations}
