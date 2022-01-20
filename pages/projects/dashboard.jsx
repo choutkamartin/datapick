@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import { format } from "date-fns";
 import Link from "next/link";
 import Anchor from "components/Anchor";
 import PrivateSidebar from "components/layout/private/PrivateSidebar";
+import SpinnerLoad from "components/SpinnerLoad";
 import path from "utils/path";
-import NotAuthorized from "components/NotAuthorized";
 
 const sidebarData = [
   {
@@ -15,22 +14,25 @@ const sidebarData = [
 ];
 
 function Dashboard() {
-  const { data: session, status } = useSession();
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = () => {
+    setLoading(true);
     fetch("/api/projects/list-projects")
       .then((res) => res.json())
       .then(
         (result) => {
           setProjects(result);
+          setLoading(false);
         },
         (error) => {
           setError(error);
+          setLoading(false);
         }
       );
   };
@@ -51,11 +53,13 @@ function Dashboard() {
     }
   };
 
-  if (status === "authenticated") {
-    return (
-      <div className="flex flex-col lg:flex-row min-h-screen">
-        <PrivateSidebar title="Projects" data={sidebarData} />
-        <div className="xl:px-24 2xl:px-60 py-20 w-full">
+  return (
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      <PrivateSidebar title="Projects" data={sidebarData} />
+      <div className="xl:px-24 2xl:px-60 py-20 w-full">
+        {loading === true ? (
+          <SpinnerLoad />
+        ) : (
           <div className="flex flex-col mb-4">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -147,16 +151,14 @@ function Dashboard() {
                 </div>
               </div>
             </div>
+            <Anchor to="/projects/new-project" type="button" variant="primary">
+              Create project
+            </Anchor>
           </div>
-          <Anchor to="/projects/new-project" type="button" variant="primary">
-            Create project
-          </Anchor>
-        </div>
+        )}
       </div>
-    );
-  }
-
-  return <NotAuthorized />;
+    </div>
+  );
 }
 
 Dashboard.auth = true;
