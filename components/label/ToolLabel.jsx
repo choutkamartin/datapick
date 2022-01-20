@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 /**
  * A component that is responsible for drawing objects such as polygon or rectangles on the image.
  * @param {*} selectedObject
@@ -14,13 +14,16 @@ export default function ToolLabel({
   image,
 }) {
   const backgroundRef = useRef();
-  const [imageWidth, setImageWidth] = useState();
-  const [imageHeight, setImageHeight] = useState();
+  const [imageWidth, setImageWidth] = useState(0);
+  const [imageHeight, setImageHeight] = useState(0);
+  const [objectWidth, setObjectWidth] = useState(0);
+  const [objectHeight, setObjectHeight] = useState(0);
   const [positionX, setPositionX] = useState(null);
   const [positionY, setPositionY] = useState(null);
   const [objectX, setObjectX] = useState();
   const [objectY, setObjectY] = useState();
   const [isMouseDown, setIsMouseDown] = useState(false);
+  const [multiplier, setMultiplier] = useState(1);
 
   /**
    * Executes when the user clicks on the drawing box, sets a mouseDown state to true, gets coordinates of the object and sets them. It draws either a polygon or a rectangle based on a selected tool.
@@ -30,8 +33,8 @@ export default function ToolLabel({
     setIsMouseDown(true);
     const { x, y } = backgroundRef.current.getBoundingClientRect();
     const { pointX, pointY } = getCoordinates(e, x, y);
-    setObjectX(pointX);
-    setObjectY(pointY);
+    setObjectX(pointX / multiplier);
+    setObjectY(pointY / multiplier);
     switch (tool) {
       case "box":
         drawRectangle(pointX, pointY);
@@ -50,6 +53,7 @@ export default function ToolLabel({
    * @param {number} positionY An y position of a click relative to the image
    */
   function drawRectangle(positionX, positionY) {
+    console.log(positionX, positionY);
     const position = annotations.findIndex(
       (object) => object.id === selectedObject.id
     );
@@ -143,7 +147,9 @@ export default function ToolLabel({
   function setMousePosition(e) {
     if (tool === "box") {
       const { x, y } = backgroundRef.current.getBoundingClientRect();
-      const { pointX, pointY } = getCoordinates(e, x, y);
+      let { pointX, pointY } = getCoordinates(e, x, y);
+      pointX = pointX / multiplier;
+      pointY = pointY / multiplier;
       setPositionX(e.clientX);
       setPositionY(e.clientY);
 
@@ -182,60 +188,116 @@ export default function ToolLabel({
    * @param {*} e Event object from the onLoad event
    */
   function handleImageLoad(e) {
+    setObjectHeight(e.target.naturalHeight);
+    setObjectWidth(e.target.naturalWidth);
     setImageHeight(e.target.naturalHeight);
     setImageWidth(e.target.naturalWidth);
+  }
+
+  /**
+   * Sets the multiplier based on the Shift key, deltaY change and multiplier condition
+   * @param {*} event Event object from the wheel event
+   */
+  function handleWheel(event) {
+    if (event.shiftKey === true) {
+      if (event.deltaY < 0) {
+        if (multiplier <= 32) {
+          setMultiplier(multiplier * 1.25);
+        }
+      } else if (event.deltaY > 0) {
+        if (multiplier > 1) {
+          setMultiplier(multiplier * 0.75);
+        }
+      }
+    }
+  }
+
+  /** Updates dimensions each time multiplier changes */
+  useEffect(() => {
+    updateDimensions();
+  }, [multiplier]);
+
+  /**
+   * Changes the image dimensions based on multiplier and initial height or width
+   */
+  function updateDimensions() {
+    setImageHeight(multiplier * objectHeight);
+    setImageWidth(multiplier * objectWidth);
   }
 
   return (
     <div className="overflow-auto">
       <div
-        className="relative"
+        className="overflow-auto"
         ref={backgroundRef}
         onMouseMove={setMousePosition}
         onMouseDown={startDraw}
         onMouseUp={stopDrag}
+        onWheel={handleWheel}
         style={{
-          width: imageWidth,
-          height: imageHeight,
+          width: objectWidth,
+          height: objectHeight,
         }}
       >
-        <img
-          src={`https://datapick.s3.eu-central-1.amazonaws.com/${image.key}`}
-          alt="Image to annotate"
-          className="block"
-          style={{ filter: `brightness(${brightness}%` }}
-          onLoad={handleImageLoad}
-        />
-        <svg className="absolute w-full h-full top-0 left-0 cursor-crosshair">
-          <rect x="0" y="0" className="w-full h-full" fill="transparent" />
-          <g>
-            {annotations
-              .filter((item) => item.type === "box")
-              .map((item) => {
-                return (
-                  <rect
-                    key={item.id}
-                    x={item.x}
-                    y={item.y}
-                    width={item.width}
-                    height={item.height}
-                    className="object"
-                  />
-                );
-              })}
-            {annotations
-              .filter((item) => item.type === "polygon")
-              .map((item) => {
-                return (
-                  <polygon
-                    key={item.id}
-                    points={getPositionString(item)}
-                    className="object"
-                  />
-                );
-              })}
-          </g>
-        </svg>
+        <div
+          className="relative top-0 left-0"
+          style={{
+            width: imageWidth,
+            height: imageHeight,
+          }}
+        >
+          <img
+            src={`https://datapick.s3.eu-central-1.amazonaws.com/${image.key}`}
+            alt="Image to annotate"
+            className="block image-annotation"
+            onLoad={handleImageLoad}
+            style={{
+              filter: `brightness(${brightness}%`,
+              width: imageWidth,
+              height: imageHeight,
+            }}
+          />
+          <svg
+            viewBox={`0 0 ${objectWidth} ${objectHeight}`}
+            className="absolute w-full h-full top-0 left-0 cursor-crosshair"
+          >
+            <rect
+              x="0"
+              y="0"
+              width={objectWidth}
+              height={objectHeight}
+              className="w-full h-full"
+              fill="transparent"
+            />
+            <g>
+              {annotations
+                .filter((item) => item.type === "box")
+                .map((item) => {
+                  return (
+                    <rect
+                      key={item.id}
+                      x={item.x}
+                      y={item.y}
+                      width={item.width}
+                      height={item.height}
+                      className="object"
+                    />
+                  );
+                })}
+              {annotations
+                .filter((item) => item.type === "polygon")
+                .map((item) => {
+                  return (
+                    <polygon
+                      key={item.id}
+                      points={getPositionString(item)}
+                      className="object"
+                    />
+                  );
+                })}
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
   );
