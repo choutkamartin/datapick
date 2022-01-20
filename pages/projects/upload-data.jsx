@@ -65,13 +65,13 @@ function UploadData() {
           });
           if (upload.ok) {
             filesArray.push({ name: file.name, key: key, size: file.size });
-            return filesArray;
           } else {
             setError("An error occured when uploading the files to S3.");
           }
         }
       }
     }
+    return filesArray;
   };
 
   const handleSubmission = async () => {
