@@ -31,50 +31,33 @@ a {
 .toolbar {
   grid-area: toolbar;
 }
+
 .sidebar-left {
   grid-area: sidebar-left;
 }
+
 .sidebar-right {
   grid-area: sidebar-right;
 }
+
 .image {
   grid-area: image;
 }
 
-rect {
-  cursor: crosshair;
-}
-img {
-  display: block;
-}
-.container {
-  display: flex;
-  gap: 20px;
-  padding: 10rem;
-  height: 100vh;
-}
-.box {
-  position: relative;
-}
-.svg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-.polygon {
+.object {
   fill: rgba(255, 0, 0, 0.1);
   stroke: #dc2626;
   cursor: crosshair;
   stroke-width: 1;
 }
+
 .panel {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: flex-start;
   gap: 16px;
 }
+
 .object {
   display: flex;
   flex-direction: column;
@@ -83,6 +66,7 @@ img {
   border: 1px solid;
   padding: 16px;
 }
+
 .data {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

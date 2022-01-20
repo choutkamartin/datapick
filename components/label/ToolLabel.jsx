@@ -14,7 +14,8 @@ export default function ToolLabel({
   image,
 }) {
   const backgroundRef = useRef();
-  const imageRef = useRef();
+  const [imageWidth, setImageWidth] = useState();
+  const [imageHeight, setImageHeight] = useState();
   const [positionX, setPositionX] = useState(null);
   const [positionY, setPositionY] = useState(null);
   const [objectX, setObjectX] = useState();
@@ -164,76 +165,77 @@ export default function ToolLabel({
    * @param {*} item The drawed object ie. polygon.
    * @returns Coordinates of the polygon points properly joined.
    */
-function getPositionString(item) {
-  const position = item.data.map((coordinate) => {
-    return `${coordinate.x}/${coordinate.y} `;
-  });
+  function getPositionString(item) {
+    const position = item.data.map((coordinate) => {
+      return `${coordinate.x}/${coordinate.y} `;
+    });
 
-  const positionString = position
-    .toString()
-    .replaceAll(",", " ")
-    .replaceAll("/", ",");
-  return positionString;
-}
+    const positionString = position
+      .toString()
+      .replaceAll(",", " ")
+      .replaceAll("/", ",");
+    return positionString;
+  }
+
+  /**
+   * Sets the image height and width state
+   * @param {*} e Event object from the onLoad event
+   */
+  function handleImageLoad(e) {
+    setImageHeight(e.target.naturalHeight);
+    setImageWidth(e.target.naturalWidth);
+  }
 
   return (
-    <div>
-      <div className="container">
-        <div
-          className="box"
-          ref={backgroundRef}
-          onMouseMove={setMousePosition}
-          onMouseDown={startDraw}
-          onMouseUp={stopDrag}
-        >
-          <div>
-            <img
-              src={`https://datapick.s3.eu-central-1.amazonaws.com/${image.key}`}
-              alt="Image to annotate"
-              style={{ filter: `brightness(${brightness}%` }}
-              ref={imageRef}
-            />
-          </div>
-          <svg className="svg">
-            {imageRef.current && (
-              <rect
-                x="0"
-                y="0"
-                width={imageRef.current.naturalWidth}
-                height={imageRef.current.naturalHeight}
-                className="cursor-crosshair"
-                fill="transparent"
-              />
-            )}
-            <g>
-              {annotations
-                .filter((item) => item.type === "box")
-                .map((item) => {
-                  return (
-                    <rect
-                      key={item.id}
-                      x={item.x}
-                      y={item.y}
-                      width={item.width}
-                      height={item.height}
-                      className="polygon"
-                    />
-                  );
-                })}
-{annotations
-  .filter((item) => item.type === "polygon")
-  .map((item) => {
-    return (
-      <polygon
-        key={item.id}
-        points={getPositionString(item)}
-        className="polygon"
-      />
-    );
-  })}
-            </g>
-          </svg>
-        </div>
+    <div className="overflow-auto">
+      <div
+        className="relative"
+        ref={backgroundRef}
+        onMouseMove={setMousePosition}
+        onMouseDown={startDraw}
+        onMouseUp={stopDrag}
+        style={{
+          width: imageWidth,
+          height: imageHeight,
+        }}
+      >
+        <img
+          src={`https://datapick.s3.eu-central-1.amazonaws.com/${image.key}`}
+          alt="Image to annotate"
+          className="block"
+          style={{ filter: `brightness(${brightness}%` }}
+          onLoad={handleImageLoad}
+        />
+        <svg className="absolute w-full h-full top-0 left-0 cursor-crosshair">
+          <rect x="0" y="0" className="w-full h-full" fill="transparent" />
+          <g>
+            {annotations
+              .filter((item) => item.type === "box")
+              .map((item) => {
+                return (
+                  <rect
+                    key={item.id}
+                    x={item.x}
+                    y={item.y}
+                    width={item.width}
+                    height={item.height}
+                    className="object"
+                  />
+                );
+              })}
+            {annotations
+              .filter((item) => item.type === "polygon")
+              .map((item) => {
+                return (
+                  <polygon
+                    key={item.id}
+                    points={getPositionString(item)}
+                    className="object"
+                  />
+                );
+              })}
+          </g>
+        </svg>
       </div>
     </div>
   );

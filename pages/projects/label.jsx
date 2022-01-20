@@ -106,7 +106,7 @@ function Label({ data }) {
       <div className="label bg-slate-100 h-screen">
         <LabelToolbar />
         <LabelSidebarLeft setBrightness={setBrightness} brightness={brightness} />
-        <div className="flex items-center justify-center p-16">
+        <div className="p-16 overflow-auto">
           {conditional()}
         </div>
         <div>{error && <AlertError title={error} className="mb-6" />}</div>
