@@ -3,6 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import PrivateLayout from "components/layout/private/PrivateLayout";
 import PublicLayout from "components/layout/public/PublicLayout";
 import LabelLayout from "components/layout/label/LabelLayout";
+import Auth from "components/Auth";
 
 const layouts = {
   Public: PublicLayout,
@@ -17,9 +18,17 @@ export default function App({
   const Layout = layouts[Component.layout] || ((children) => <>{children}</>);
   return (
     <SessionProvider session={session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {Component.auth ? (
+        <Auth>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Auth>
+      ) : (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )}
     </SessionProvider>
   );
 }
