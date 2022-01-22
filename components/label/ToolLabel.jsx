@@ -229,7 +229,6 @@ export default function ToolLabel({
     <div className="overflow-auto">
       <div
         className="overflow-auto"
-        ref={backgroundRef}
         onMouseMove={setMousePosition}
         onMouseDown={startDraw}
         onMouseUp={stopDrag}
@@ -241,6 +240,7 @@ export default function ToolLabel({
       >
         <div
           className="relative top-0 left-0"
+          ref={backgroundRef}
           style={{
             width: imageWidth,
             height: imageHeight,
