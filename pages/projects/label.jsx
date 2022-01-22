@@ -28,6 +28,7 @@ function Label({ data }) {
   const [annotations, setAnnotations] = useState([]);
   const [tool, setTool] = useState(null);
   const [brightness, setBrightness] = useState(100);
+  const [highlight, setHighlight] = useState(null);
 
   const router = useRouter();
 
@@ -94,6 +95,7 @@ function Label({ data }) {
           tool={tool}
           brightness={brightness}
           image={image}
+          highlight={highlight}
         />
       );
     } else {
@@ -106,7 +108,7 @@ function Label({ data }) {
   } else {
     return (
       <div className="label bg-slate-100 h-screen">
-        <LabelToolbar />
+        <LabelToolbar project={project} />
         <LabelSidebarLeft
           setBrightness={setBrightness}
           brightness={brightness}
@@ -124,6 +126,7 @@ function Label({ data }) {
           setSelectedObject={setSelectedObject}
           setTool={setTool}
           setAnnotations={setAnnotations}
+          setHighlight={setHighlight}
         />
       </div>
     );
