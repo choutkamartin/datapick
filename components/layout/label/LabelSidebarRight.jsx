@@ -69,7 +69,7 @@ export default function LabelSidebarRight({
   }
 
   return (
-    <div className="sidebar-right flex flex-col justify-between bg-white shadow p-4">
+    <div className="sidebar-right flex flex-col justify-between bg-white shadow p-4 overflow-y-scroll">
       <div>
         <Title headingLevel="h3" className="mb-3">
           Annotations
@@ -113,7 +113,7 @@ export default function LabelSidebarRight({
                         if (annotation.name === item.name)
                           return (
                             <div
-                              className="flex justify-between items-center border p-2 rounded hover:ring-2 hover:ring-indigo-700 cursor-pointer"
+                              className="flex gap-x-4 items-center border p-2 rounded hover:ring-2 hover:ring-indigo-700 cursor-pointer"
                               key={annotation.name}
                               onMouseEnter={() => setHighlight(annotation.id)}
                               onMouseLeave={() => setHighlight(null)}
@@ -132,9 +132,9 @@ export default function LabelSidebarRight({
                                   />
                                 )}
                                 <input
-                                  defaultValue={annotation.name}
+                                  defaultValue={annotation.alias}
                                   onChange={(e) => changeName(annotation.id, e)}
-                                  className="rounded px-2 py-1"
+                                  className="rounded-sm px-2 py-1 w-full border-gray-300 focus-visible:outline-none focus:ring-indigo-600 focus:ring-2"
                                 />
                               </div>
                               <div className="flex items-center gap-x-4">
