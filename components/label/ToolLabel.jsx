@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { joinClassNames } from "utils/helpers";
 /**
  * A component that is responsible for drawing objects such as polygon or rectangles on the image.
  * @param {*} selectedObject
@@ -12,6 +13,7 @@ export default function ToolLabel({
   tool,
   brightness,
   image,
+  highlight,
 }) {
   const backgroundRef = useRef();
   const [imageWidth, setImageWidth] = useState(0);
@@ -53,7 +55,6 @@ export default function ToolLabel({
    * @param {number} positionY An y position of a click relative to the image
    */
   function drawRectangle(positionX, positionY) {
-    console.log(positionX, positionY);
     const position = annotations.findIndex(
       (object) => object.id === selectedObject.id
     );
@@ -293,7 +294,10 @@ export default function ToolLabel({
                     <polygon
                       key={item.id}
                       points={getPositionString(item)}
-                      className="object"
+                      className={joinClassNames(
+                        highlight === item.id && "highlighted",
+                        "object"
+                      )}
                     />
                   );
                 })}

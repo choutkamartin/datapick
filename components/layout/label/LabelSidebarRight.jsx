@@ -6,9 +6,17 @@ import {
   PlusIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import Button from "components/buttons/Button";
 import { v4 as uuidv4 } from "uuid";
+import {
+  faDrawPolygon,
+  faEdit,
+  faSquare,
+  faTimes,
+  faTimesCircle,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function LabelSidebarRight({
   project,
@@ -21,6 +29,7 @@ export default function LabelSidebarRight({
   setTool,
   annotations,
   setAnnotations,
+  setHighlight,
 }) {
   const [selected, setSelected] = useState();
 
@@ -33,6 +42,24 @@ export default function LabelSidebarRight({
     setTool(item.type);
   }
 
+  function continueAnnotation(annotation) {
+    setSelectedObject({
+      id: annotation.id,
+      type: annotation.type,
+      name: annotation.name,
+    });
+    setTool(annotation.type);
+  }
+
+  function changeName(id, e) {
+    const position = annotations.findIndex((object) => object.id === id);
+    const items = [...annotations];
+    const item = { ...items[position] };
+    item.alias = e.target.value;
+    items[position] = item;
+    setAnnotations(items);
+  }
+
   /**
    * A function that deletes the specified single annotation.
    * @param {string} id The ID of the single annotation user wants to delete.
@@ -42,7 +69,7 @@ export default function LabelSidebarRight({
   }
 
   return (
-    <div className="sidebar-right flex flex-col justify-between bg-white shadow p-4">
+    <div className="sidebar-right flex flex-col justify-between bg-white shadow p-4 overflow-y-scroll">
       <div>
         <Title headingLevel="h3" className="mb-3">
           Annotations
@@ -52,7 +79,19 @@ export default function LabelSidebarRight({
             return (
               <div className="p-4 border rounded" key={item.name}>
                 <div className="flex items-center justify-between">
-                  <div className="flex">
+                  <div className="flex items-center gap-x-4">
+                    {item.type === "box" && (
+                      <FontAwesomeIcon
+                        icon={faSquare}
+                        className="text-indigo-700"
+                      />
+                    )}
+                    {item.type === "polygon" && (
+                      <FontAwesomeIcon
+                        icon={faDrawPolygon}
+                        className="text-indigo-700"
+                      />
+                    )}
                     <Title headingLevel="h4">{item.name}</Title>
                   </div>
                   {selected === item.name ? (
@@ -74,16 +113,54 @@ export default function LabelSidebarRight({
                         if (annotation.name === item.name)
                           return (
                             <div
-                              className="flex justify-between items-center border p-2 rounded"
+                              className="flex gap-x-4 items-center border p-2 rounded hover:ring-2 hover:ring-indigo-700 cursor-pointer"
                               key={annotation.name}
+                              onMouseEnter={() => setHighlight(annotation.id)}
+                              onMouseLeave={() => setHighlight(null)}
                             >
-                              Test
-                              <button
-                                className="border-0"
-                                onClick={() => deleteAnnotation(annotation.id)}
-                              >
-                                <XIcon className="h-5 w-5 text-red-700" />
-                              </button>
+                              <div className="flex items-center gap-x-4">
+                                {item.type === "box" && (
+                                  <FontAwesomeIcon
+                                    icon={faSquare}
+                                    className="text-indigo-700"
+                                  />
+                                )}
+                                {item.type === "polygon" && (
+                                  <FontAwesomeIcon
+                                    icon={faDrawPolygon}
+                                    className="text-indigo-700"
+                                  />
+                                )}
+                                <input
+                                  defaultValue={annotation.alias}
+                                  onChange={(e) => changeName(annotation.id, e)}
+                                  className="rounded-sm px-2 py-1 w-full border-gray-300 focus-visible:outline-none focus:ring-indigo-600 focus:ring-2"
+                                />
+                              </div>
+                              <div className="flex items-center gap-x-4">
+                                <button
+                                  className="flex items-center"
+                                  onClick={() => continueAnnotation(annotation)}
+                                >
+                                  <FontAwesomeIcon
+                                    icon={faEdit}
+                                    className="text-indigo-700"
+                                    fixedWidth
+                                  />
+                                </button>
+                                <button
+                                  className="flex items-center"
+                                  onClick={() =>
+                                    deleteAnnotation(annotation.id)
+                                  }
+                                >
+                                  <FontAwesomeIcon
+                                    icon={faTimesCircle}
+                                    className="text-red-700"
+                                    fixedWidth
+                                  />
+                                </button>
+                              </div>
                             </div>
                           );
                       })}
@@ -94,7 +171,7 @@ export default function LabelSidebarRight({
                         onClick={() => newAnnotation(item)}
                       >
                         <PlusIcon className="h-5 w-5 text-white" />
-                        Add new annotation
+                        Add new
                       </button>
                     ) : (
                       <button
@@ -102,7 +179,7 @@ export default function LabelSidebarRight({
                         onClick={() => setSelectedObject(null)}
                       >
                         <CheckIcon className="h-5 w-5 text-white" />
-                        Finish annotation
+                        Finish
                       </button>
                     )}
                   </div>
