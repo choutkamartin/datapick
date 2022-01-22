@@ -283,7 +283,10 @@ export default function ToolLabel({
                       y={item.y}
                       width={item.width}
                       height={item.height}
-                      className="object"
+                      className={joinClassNames(
+                        highlight === item.id && "highlighted",
+                        "object"
+                      )}
                     />
                   );
                 })}
