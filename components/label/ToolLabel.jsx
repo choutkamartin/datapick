@@ -108,6 +108,8 @@ export default function ToolLabel({
     if (position != -1) {
       const items = [...annotations];
       const item = { ...items[position] };
+      pointX = pointX / multiplier;
+      pointY = pointY / multiplier;
       item.data.push({ x: pointX, y: pointY });
       items[position] = item;
       setAnnotations(items);
@@ -118,8 +120,8 @@ export default function ToolLabel({
         type: selectedObject.type,
         data: [
           {
-            x: pointX,
-            y: pointY,
+            x: pointX / multiplier,
+            y: pointY / multiplier,
           },
         ],
       };
