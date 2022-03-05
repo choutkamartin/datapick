@@ -113,7 +113,7 @@ function Label({ data }) {
           setBrightness={setBrightness}
           brightness={brightness}
         />
-        <div className="overflow-hidden">{conditional()}</div>
+        <div className="overflow-auto">{conditional()}</div>
         <div>{error && <AlertError title={error} className="mb-6" />}</div>
         <LabelSidebarRight
           annotations={annotations}

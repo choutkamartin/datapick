@@ -230,7 +230,7 @@ export default function ToolLabel({
 
   return (
     <div
-      className="inline-block overflow-auto max-h-full max-w-full"
+      className="inline-block"
       onMouseMove={setMousePosition}
       onMouseDown={startDraw}
       onMouseUp={stopDrag}
