@@ -35,7 +35,7 @@ function Label({ data }) {
   // Run only on start and when project const changes
   useEffect(() => {
     getNextImage();
-  }, [project]);
+  }, [project, getNextImage]);
 
   async function saveDatabase() {
     return await fetch(`/api/projects/save-project?id=${project._id}`, {
