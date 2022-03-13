@@ -50,6 +50,7 @@ export default NextAuth({
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      authorization: { params: { scope: "openid name email" } },
     }),
   ],
   secret: process.env.SECRET,
