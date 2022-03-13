@@ -1,7 +1,9 @@
+/* eslint-disable react/no-unescaped-entities */
 import Container from "components/Container";
 import Paragraph from "components/Paragraph";
 import List from "components/lists/List";
 import Heading from "components/Heading";
+import Link from "next/link";
 
 function PrivacyPolicy() {
   return (
@@ -19,6 +21,7 @@ function PrivacyPolicy() {
           <a
             href="https://www.termsfeed.com/blog/sample-privacy-policy-template/"
             target="_blank"
+            rel="noreferrer"
           >
             Privacy Policy Template
           </a>
@@ -82,13 +85,9 @@ function PrivacyPolicy() {
           </List.Item>
           <List.Item>
             <strong>Website</strong> refers to Datapick, accessible from{" "}
-            <a
-              href="https://www.datapick.tech/"
-              rel="external nofollow noopener"
-              target="_blank"
-            >
-              https://www.datapick.tech/
-            </a>
+            <Link href="https://www.datapick.tech/">
+              <a>https://www.datapick.tech/</a>
+            </Link>
           </List.Item>
           <List.Item>
             <strong>You</strong> means the individual accessing or using the
@@ -164,7 +163,7 @@ function PrivacyPolicy() {
             disabling, or deleting local shared objects?&quot; available at{" "}
             <a
               href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
-              rel="external nofollow noopener"
+              rel="noreferrer"
               target="_blank"
             >
               https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html
@@ -187,6 +186,7 @@ function PrivacyPolicy() {
         <a
           href="https://www.termsfeed.com/privacy-policy-generator/#faq-8"
           target="_blank"
+          rel="noreferrer"
         >
           Cookies by TermsFeed Generator
         </a>
