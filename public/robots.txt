@@ -1,0 +1,15 @@
+# Block all crawlers for /user
+User-agent: *
+Disallow: /user
+
+# Block all crawlers for /projects
+User-agent: *
+Disallow: /projects
+
+# Block all crawlers for /api
+User-agent: *
+Disallow: /api
+
+# Allow all crawlers
+User-agent: *
+Allow: /

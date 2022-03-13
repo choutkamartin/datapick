@@ -11,7 +11,7 @@ export default async function handler(req, res) {
       name: projectName,
       description: projectDescription,
       type: projectType,
-      author: session.user.id,
+      author: session.user._id,
     });
     project.save(function (err, project) {
       if (err) {

@@ -43,6 +43,13 @@ export default function MenuAccount() {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
+                  <Link href={path.projects.dashboard}>
+                    <a className="hover:bg-indigo-500 hover:text-white text-gray-900 group flex rounded items-center w-full px-2 py-2 text-sm">
+                      Projects
+                    </a>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item>
                   <button
                     className="hover:bg-indigo-500 hover:text-white text-gray-900 group flex rounded items-center w-full px-2 py-2 text-sm"
                     onClick={() =>

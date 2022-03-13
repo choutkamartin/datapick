@@ -35,7 +35,7 @@ function Label({ data }) {
   // Run only on start and when project const changes
   useEffect(() => {
     getNextImage();
-  }, [project]);
+  }, [project, getNextImage]);
 
   async function saveDatabase() {
     return await fetch(`/api/projects/save-project?id=${project._id}`, {
@@ -113,7 +113,7 @@ function Label({ data }) {
           setBrightness={setBrightness}
           brightness={brightness}
         />
-        <div className="p-16">{conditional()}</div>
+        <div className="overflow-auto">{conditional()}</div>
         <div>{error && <AlertError title={error} className="mb-6" />}</div>
         <LabelSidebarRight
           annotations={annotations}

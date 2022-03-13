@@ -208,7 +208,7 @@ export default function ToolLabel({
           setMultiplier(multiplier * 1.25);
         }
       } else if (event.deltaY > 0) {
-        if (multiplier > 1) {
+        if (multiplier > 0.5) {
           setMultiplier(multiplier * 0.75);
         }
       }
@@ -229,84 +229,78 @@ export default function ToolLabel({
   }
 
   return (
-    <div className="overflow-auto">
+    <div
+      className="inline-block"
+      onMouseMove={setMousePosition}
+      onMouseDown={startDraw}
+      onMouseUp={stopDrag}
+      onWheel={handleWheel}
+    >
       <div
-        className="overflow-auto"
-        onMouseMove={setMousePosition}
-        onMouseDown={startDraw}
-        onMouseUp={stopDrag}
-        onWheel={handleWheel}
+        className="inline-block relative top-0 left-0"
+        ref={backgroundRef}
         style={{
-          width: objectWidth,
-          height: objectHeight,
+          width: imageWidth,
+          height: imageHeight,
         }}
       >
-        <div
-          className="relative top-0 left-0"
-          ref={backgroundRef}
+        <img
+          src={`https://datapick.s3.eu-central-1.amazonaws.com/${image.key}`}
+          alt="Image to annotate"
+          className="block image-annotation"
+          onLoad={handleImageLoad}
           style={{
+            filter: `brightness(${brightness}%`,
             width: imageWidth,
             height: imageHeight,
           }}
+        />
+        <svg
+          viewBox={`0 0 ${objectWidth} ${objectHeight}`}
+          className="absolute w-full h-full top-0 left-0 cursor-crosshair"
         >
-          <img
-            src={`https://datapick.s3.eu-central-1.amazonaws.com/${image.key}`}
-            alt="Image to annotate"
-            className="block image-annotation"
-            onLoad={handleImageLoad}
-            style={{
-              filter: `brightness(${brightness}%`,
-              width: imageWidth,
-              height: imageHeight,
-            }}
+          <rect
+            x="0"
+            y="0"
+            width={objectWidth}
+            height={objectHeight}
+            className="w-full h-full"
+            fill="transparent"
           />
-          <svg
-            viewBox={`0 0 ${objectWidth} ${objectHeight}`}
-            className="absolute w-full h-full top-0 left-0 cursor-crosshair"
-          >
-            <rect
-              x="0"
-              y="0"
-              width={objectWidth}
-              height={objectHeight}
-              className="w-full h-full"
-              fill="transparent"
-            />
-            <g>
-              {annotations
-                .filter((item) => item.type === "box")
-                .map((item) => {
-                  return (
-                    <rect
-                      key={item.id}
-                      x={item.x}
-                      y={item.y}
-                      width={item.width}
-                      height={item.height}
-                      className={joinClassNames(
-                        highlight === item.id && "highlighted",
-                        "object"
-                      )}
-                    />
-                  );
-                })}
-              {annotations
-                .filter((item) => item.type === "polygon")
-                .map((item) => {
-                  return (
-                    <polygon
-                      key={item.id}
-                      points={getPositionString(item)}
-                      className={joinClassNames(
-                        highlight === item.id && "highlighted",
-                        "object"
-                      )}
-                    />
-                  );
-                })}
-            </g>
-          </svg>
-        </div>
+          <g>
+            {annotations
+              .filter((item) => item.type === "box")
+              .map((item) => {
+                return (
+                  <rect
+                    key={item.id}
+                    x={item.x}
+                    y={item.y}
+                    width={item.width}
+                    height={item.height}
+                    className={joinClassNames(
+                      highlight === item.id && "highlighted",
+                      "object"
+                    )}
+                  />
+                );
+              })}
+            {annotations
+              .filter((item) => item.type === "polygon")
+              .map((item) => {
+                return (
+                  <polygon
+                    key={item.id}
+                    points={getPositionString(item)}
+                    className={joinClassNames(
+                      highlight === item.id && "highlighted",
+                      "object"
+                    )}
+                  />
+                );
+              })}
+          </g>
+        </svg>
       </div>
     </div>
   );

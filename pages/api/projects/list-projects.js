@@ -5,6 +5,6 @@ import dbConnect from "lib/dbConnect";
 export default async function handler(req, res) {
   await dbConnect();
   const session = await getSession({ req });
-  const projects = await Project.find({ author: session.user.id });
+  const projects = await Project.find({ author: session.user._id });
   res.json(projects);
 }
