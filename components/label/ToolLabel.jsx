@@ -231,7 +231,7 @@ export default function ToolLabel({
 
   return (
     <div
-      className="inline-block"
+      className="inline-block select-none"
       onMouseMove={setMousePosition}
       onMouseDown={startDraw}
       onMouseUp={stopDrag}
