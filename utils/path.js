@@ -1,5 +1,5 @@
 /** A list of paths to specific pages */
-export default {
+const path = {
   index: "/",
   platform: {
     imageAnnotation: "/platform/image-annotation",
@@ -34,13 +34,16 @@ export default {
     team: "/user/team",
   },
   social: {
-    facebook: "facebook",
-    twitter: "twitter",
-    github: "github",
+    facebook: "https://www.facebook.com/datapick.tech",
+    github: "https://github.com/choutkamartin/datapick",
   },
   termsOfService: "/terms-of-service",
   privacyPolicy: "/privacy-policy",
   contact: "/contact",
-  help: "/help",
-  api: "/api",
+  help: {
+    general: "/help/general",
+    api: "/help/api",
+  },
 };
+
+export default path;
