@@ -8,7 +8,9 @@ export default function BlockCode({ children, className }) {
         className
       )}
     >
-      <pre>{children}</pre>
+      <pre className="whitespace-pre-wrap">
+        <code>{children}</code>
+      </pre>
     </div>
   );
 }
