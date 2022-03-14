@@ -23,6 +23,16 @@ const objectTypes = [
     id: "polygon",
     name: "Polygon",
   },
+  {
+    id: "circle",
+    name: "Circle",
+    disabled: true,
+  },
+  {
+    id: "cuboid",
+    name: "Cuboid",
+    disabled: true,
+  },
 ];
 
 function Taxonomy() {
@@ -104,6 +114,7 @@ function Taxonomy() {
                         onClick={() => setType(item.id)}
                         className="relative"
                         key={item.id}
+                        disabled={item.disabled}
                       >
                         {item.name}
                         <span className="ml-1">
@@ -166,6 +177,7 @@ function Taxonomy() {
                             type="number"
                             register={register}
                             errors={errors.minWidth}
+                            disabled
                           />
                           <Input
                             label="Min. height"
@@ -173,6 +185,7 @@ function Taxonomy() {
                             type="number"
                             register={register}
                             errors={errors.minHeight}
+                            disabled
                           />
                           <Button type="submit">Create object</Button>
                         </Form>

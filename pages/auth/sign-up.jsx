@@ -47,9 +47,9 @@ function SignUp() {
   return (
     <Container
       variant="box"
-      className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
+      className="py-8 lg:py-36"
     >
-      <Card className="lg:w-8/12 mx-auto">
+      <Card>
         <Card.Head className="text-white">
           <Heading headingLevel="h2">Sign Up</Heading>
         </Card.Head>
@@ -89,5 +89,4 @@ function SignUp() {
   );
 }
 
-SignUp.layout = "Public";
 export default SignUp;

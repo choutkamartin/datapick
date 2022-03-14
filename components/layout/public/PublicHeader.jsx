@@ -15,12 +15,12 @@ const additionalLinks = [
   {
     name: "Help",
     description: "Struggling with something?",
-    href: path.help,
+    href: path.help.general,
   },
   {
     name: "API",
     description: "Take a look at our API and documentation!",
-    href: path.api,
+    href: path.help.api,
   },
 ];
 
@@ -33,21 +33,21 @@ const solutions = [
       {
         name: "Image annotation",
         description: "Image annotations",
-        href: path.platform.audioAnnotation,
+        href: path.platform.imageAnnotation,
       },
       {
         name: "Text annotation",
-        description: "Text annotations",
+        description: "Coming soon",
         href: path.platform.textAnnotation,
       },
       {
         name: "Audio annotation",
-        description: "Audio annotations",
+        description: "Coming soon",
         href: path.platform.audioAnnotation,
       },
       {
         name: "Video annotation",
-        description: "Video annotations",
+        description: "Coming soon",
         href: path.platform.videoAnnotation,
       },
     ],
@@ -66,8 +66,13 @@ const solutions = [
   },
 ];
 
-const resources = [];
-const recentPosts = [{ id: 1, name: "Test Post", href: "/blog/test-post" }];
+const resources = [
+  {
+    name: "Test",
+    description: "Test",
+    icon: faUsers,
+  },
+];
 
 export default function PublicHeader() {
   const { data: session, status } = useSession();
@@ -187,10 +192,11 @@ export default function PublicHeader() {
                             <a
                               key={item.name}
                               href={item.href}
-                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer"
                             >
-                              <item.icon
-                                className="flex-shrink-0 h-6 w-6 text-indigo-600"
+                              <FontAwesomeIcon
+                                icon={item.icon}
+                                className="h-6 w-6 text-indigo-600"
                                 aria-hidden="true"
                               />
                               <div className="ml-4">
@@ -203,38 +209,6 @@ export default function PublicHeader() {
                               </div>
                             </a>
                           ))}
-                        </div>
-                        <div className="px-5 py-5 bg-gray-50 sm:px-8 sm:py-8">
-                          <div>
-                            <h3 className="text-sm tracking-wide font-medium text-gray-500 uppercase">
-                              Recent Posts
-                            </h3>
-                            <ul role="list" className="mt-4 space-y-4">
-                              {recentPosts.map((post) => (
-                                <li
-                                  key={post.id}
-                                  className="text-base truncate"
-                                >
-                                  <a
-                                    href={post.href}
-                                    className="font-medium text-gray-900 hover:text-gray-700"
-                                  >
-                                    {post.name}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div className="mt-5 text-sm">
-                            <a
-                              href="#"
-                              className="font-medium text-indigo-600 hover:text-indigo-500"
-                            >
-                              {" "}
-                              View all posts{" "}
-                              <span aria-hidden="true">&rarr;</span>
-                            </a>
-                          </div>
                         </div>
                       </div>
                     </Popover.Panel>

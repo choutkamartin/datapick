@@ -56,7 +56,7 @@ function NewUser({ user, error }) {
       variant="box"
       className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
     >
-      <Card className="mx-auto w-8/12">
+      <Card>
         <Card.Head className="text-white">
           <Heading headingLevel="h2">Set up your account</Heading>
         </Card.Head>
@@ -112,7 +112,6 @@ function NewUser({ user, error }) {
   );
 }
 
-NewUser.layout = "Public";
 export default NewUser;
 
 export async function getServerSideProps({ query }) {

@@ -53,10 +53,10 @@ img {
 }
 
 .object {
-  fill: rgba(255, 0, 0, 0.1);
-  stroke: #dc2626;
+  fill: rgba(0, 255, 0, 0.1);
+  stroke: #09ff00;
   cursor: crosshair;
-  stroke-width: 1;
+  stroke-width: 2;
 }
 
 .panel {
@@ -76,7 +76,7 @@ img {
 }
 
 .highlighted {
-  fill: rgba(255, 0, 0, 0.25);
+  fill: rgba(0, 255, 0, 0.25);
 }
 
 .data {

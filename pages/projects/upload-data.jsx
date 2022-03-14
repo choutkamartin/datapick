@@ -10,7 +10,6 @@ import Card from "components/Card";
 import Paragraph from "components/Paragraph";
 import InputFile from "components/inputs/InputFile";
 import LineVertical from "components/LineVertical";
-import NotAuthorized from "components/NotAuthorized";
 import PrivateSidebar from "components/layout/private/PrivateSidebar";
 import Form from "components/forms/Form";
 import Container from "components/Container";

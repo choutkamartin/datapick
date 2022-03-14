@@ -5,11 +5,13 @@ import Anchor from "components/Anchor";
 import PrivateSidebar from "components/layout/private/PrivateSidebar";
 import SpinnerLoad from "components/SpinnerLoad";
 import path from "utils/path";
+import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
 const sidebarData = [
   {
     name: "Dashboard",
     href: path.projects.dashboard,
+    icon: faTasks,
   },
 ];
 
