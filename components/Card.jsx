@@ -4,7 +4,7 @@ function Card({ children, className }) {
   return (
     <div
       className={joinClassNames(
-        "w-full rounded-lg overflow-hidden shadow-md",
+        "w-full rounded overflow-hidden shadow-md",
         className
       )}
     >
@@ -17,7 +17,7 @@ function Head({ children, className }) {
   return (
     <div
       className={joinClassNames(
-        "px-4 lg:px-16 py-8 flex bg-indigo-700",
+        "px-4 lg:px-16 py-8 flex border-b bg-indigo-600",
         className
       )}
     >
