@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import Heading from "components/Heading";
 import Paragraph from "components/Paragraph";
@@ -24,11 +24,12 @@ function GetData() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const { id } = router.query;
+
   useEffect(() => {
     fetchData();
-  }, [id]);
+  }, [id, fetchData]);
 
-  function fetchData() {
+  const fetchData = useCallback(() => {
     setLoading(true);
     fetch(`/api/projects/get-data?id=${id}`)
       .then((res) => res.json())
@@ -36,14 +37,13 @@ function GetData() {
         (result) => {
           setData(JSON.stringify(result, null, 2));
           setLoading(false);
-          console.log(result);
         },
         (error) => {
           setError(error);
           setLoading(false);
         }
       );
-  }
+  }, [id]);
 
   function copyCode() {
     navigator.clipboard.writeText(data);
