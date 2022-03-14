@@ -12,6 +12,9 @@ Datapick is a tool for labelling raw data. These labelled data can be later used
 If you want to learn more about Datapick and the process behind it, you can check out the blog page: [www.blog.datapick.tech](https://blog.datapick.tech/).
 
 ## Images
-<span>
-  <img src="https://user-images.githubusercontent.com/45522695/158090902-63e61308-c1e2-4008-849e-2e74d627f979.png" />
-</span>
+### Label tool
+<img src="https://user-images.githubusercontent.com/45522695/158090902-63e61308-c1e2-4008-849e-2e74d627f979.png" />
+
+### User profile
+<img src="https://user-images.githubusercontent.com/45522695/158091649-811a045f-9ce1-4575-afdd-0d188d29b88a.png" />
+
