@@ -15,7 +15,13 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
-  const Layout = layouts[Component.layout] || ((children) => <>{children}</>);
+  const Layout =
+    layouts[Component.layout] ||
+    (({ children }) => (
+      <div className="min-h-screen bg-gradient-to-r bg-slate-100 flex items-center justify-center">
+        {children}
+      </div>
+    ));
   return (
     <SessionProvider session={session}>
       {Component.auth ? (
