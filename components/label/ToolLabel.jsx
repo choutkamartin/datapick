@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+/* eslint-disable @next/next/no-img-element */
+import { useState, useRef, useEffect, useCallback } from "react";
 import { joinClassNames } from "utils/helpers";
 /**
  * A component that is responsible for drawing objects such as polygon or rectangles on the image.
- * @param {*} selectedObject
+ * @param {Object} selectedObject
  * @param {Array} annotations An array containing all annotations for the current image.
  * @returns
  */
@@ -218,15 +219,15 @@ export default function ToolLabel({
   /** Updates dimensions each time multiplier changes */
   useEffect(() => {
     updateDimensions();
-  }, [multiplier]);
+  }, [multiplier, updateDimensions]);
 
   /**
    * Changes the image dimensions based on multiplier and initial height or width
    */
-  function updateDimensions() {
+  const updateDimensions = useCallback(() => {
     setImageHeight(multiplier * objectHeight);
     setImageWidth(multiplier * objectWidth);
-  }
+  }, [multiplier, objectHeight, objectWidth]);
 
   return (
     <div
