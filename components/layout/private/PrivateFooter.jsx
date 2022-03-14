@@ -3,6 +3,7 @@ import Anchor from "components/Anchor";
 import Title from "components/Heading";
 import SocialIcons from "components/icons/IconsSocial";
 import Logo from "components/LogoBrand";
+import Paragraph from "components/Paragraph";
 import path from "utils/path";
 
 const footer = [
@@ -10,32 +11,32 @@ const footer = [
     title: "Platform",
     children: [
       {
-        title: "Image Annotation",
+        title: "Image annotation",
         href: path.platform.imageAnnotation,
         type: "link",
       },
       {
-        title: "Text Annotation",
+        title: "Text annotation",
         href: path.platform.textAnnotation,
         type: "link",
       },
       {
-        title: "Audio Annotation",
+        title: "Audio annotation",
         href: path.platform.audioAnnotation,
         type: "link",
       },
       {
-        title: "Video Annotation",
+        title: "Video annotation",
         href: path.platform.videoAnnotation,
         type: "link",
       },
     ],
   },
   {
-    title: "Company",
+    title: "Useful links",
     children: [
       {
-        title: "About Us",
+        title: "About",
         href: path.company.aboutUs,
         type: "link",
       },
@@ -49,40 +50,34 @@ const footer = [
         href: path.company.help,
         type: "link",
       },
-      {
-        title: "Company",
-        href: path.company.company,
-        type: "link",
-      },
     ],
   },
 ];
 
-export default function PrivateFooter() {
+export default function PublicFooter() {
   return (
-    <footer className="bg-white border-t py-12 px-4 md:px-8 lg:px-20 xl:px-40 2xl:px-14">
+    <footer className="bg-white py-12 px-4 md:px-8 lg:px-14 border-t">
       <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-x-64 gap-y-8">
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-y-8">
           <Logo />
-          <section className="hidden lg:block">
-            <Title headingLevel="h3" className="mb-2">
-              Latest Blog Post
+          <section>
+            <Title headingLevel="h4" className="">
+              Datapick
             </Title>
-            <article>
-              <Title headingLevel="h4" className="">
-                Ready to get started?
-              </Title>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repudiandae accusamus porro ducimus totam nemo fugiat incidunt
-                iste sit ipsam ullam aspernatur necessitatibus.
-              </p>
-            </article>
+            <Paragraph>
+              Datapick is a data labelling platform created as a bachelors
+              project at{" "}
+              <Anchor type="link" to="https://www.czu.cz/">
+                CULS Prague
+              </Anchor>
+              . The data labelling platform supports data upload, taxonomy,
+              project creation, image labelling and more.
+            </Paragraph>
           </section>
         </div>
         <VerticalLine className="hidden lg:block" />
         <div className="flex flex-col gap-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-8">
+          <div className="grid grid-cols-2">
             {footer.map((item) => {
               return (
                 <div key={item.title}>
@@ -107,14 +102,12 @@ export default function PrivateFooter() {
           </div>
           <div className="flex flex-wrap gap-x-12">
             <p>© {new Date().getFullYear()}</p>
-            <div className="flex gap-x-4">
-              <Anchor to={path.privacyPolicy} type="link">
-                Privacy policy
-              </Anchor>
-              <Anchor to={path.termsOfService} type="link">
-                Terms of Service
-              </Anchor>
-            </div>
+            <Anchor to={path.privacyPolicy} type="link">
+              Privacy policy
+            </Anchor>
+            <Anchor to={path.termsOfService} type="link">
+              Terms of Service
+            </Anchor>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const session = await getSession({ req });
     User.findById(session.user.id, { password: 0 }, function (err, user) {
       if (err) {
-        console.log(err);
+        res.status(500).end();
         return resolve();
       } else {
         res.json(user);

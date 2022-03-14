@@ -12,6 +12,8 @@ import ButtonsOAuth from "components/buttons/ButtonsOAuth";
 import Card from "components/Card";
 import Container from "components/Container";
 import path from "utils/path";
+import Paragraph from "components/Paragraph";
+import PublicLayout from "components/layout/public/PublicLayout";
 
 const authErrors = {
   Signin: "Try signing with a different account.",
@@ -46,13 +48,17 @@ function SignIn() {
   };
 
   return (
-    <Container
-      variant="box"
-      className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
-    >
-      <Card className="lg:w-8/12 mx-auto">
+    <Container variant="box" className="py-8 lg:py-36">
+      <Card className="w-full">
         <Card.Head className="text-white">
-          <Heading headingLevel="h2">Sign In</Heading>
+          <div className="flex flex-col">
+            <Heading headingLevel="h2" className="text-white mb-3">
+              Sign In
+            </Heading>
+            <Paragraph className="text-white">
+              Login to your account with one of the following methods.
+            </Paragraph>
+          </div>
         </Card.Head>
         <Card.Body>
           {error && <AlertError title={errorMessage} className="mb-6" />}

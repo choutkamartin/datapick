@@ -38,7 +38,7 @@ const ButtonScroll = () => {
       <button
         type="button"
         className={
-          "flex p-3 rounded fixed text-white bg-indigo-700 hover:bg-damask-600 z-50 right-2 bottom-2 lg:right-8 lg:bottom-8"
+          "flex p-3 rounded fixed text-white bg-indigo-600 hover:bg-indigo-700 z-50 right-2 bottom-2 lg:right-8 lg:bottom-8"
         }
         onClick={scrollToTop}
       >

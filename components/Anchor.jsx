@@ -11,11 +11,6 @@ export default forwardRef(function Anchor(
   const getClassNames = () => {
     var styles;
     if (type === "link") {
-      if (to === router.pathname) {
-        styles = "underline";
-      } else {
-        styles = "text-gray-600";
-      }
       return joinClassNames("hover:text-black font-medium", styles);
     } else {
       if (variant === "primary") {

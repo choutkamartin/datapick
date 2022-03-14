@@ -4,8 +4,15 @@ import Heading from "components/Heading";
 import Button from "components/buttons/Button";
 import Container from "components/Container";
 import Card from "components/Card";
+import Paragraph from "components/Paragraph";
+import Modal from "components/Modal";
+import { useState } from "react";
+import AlertError from "components/alerts/AlertError";
 
 function ForgotPassword() {
+  const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -19,18 +26,29 @@ function ForgotPassword() {
       },
       body: JSON.stringify(data),
     });
+    if (response.ok) {
+      {
+        setIsOpen(true);
+      }
+    } else {
+      setError("User not found.");
+    }
   };
 
   return (
-    <Container
-      variant="box"
-      className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
-    >
-      <Card className="w-full mx-auto lg:w-6/12">
+    <Container variant="box" className="py-8 lg:py-36">
+      <Card className="w-full">
         <Card.Head className="text-white">
-          <Heading headingLevel="h2">Forgot Password</Heading>
+          <div className="flex flex-col">
+            <Heading headingLevel="h2">Forgot Password</Heading>
+            <Paragraph className="text-white">
+              Forgot password? No problem! Enter your e-mail address you
+              signed-up with.
+            </Paragraph>
+          </div>
         </Card.Head>
         <Card.Body>
+          {error && <AlertError title={error} className="mb-6" />}
           <form
             className="flex flex-col gap-y-4"
             onSubmit={handleSubmit(onSubmit)}
@@ -47,6 +65,12 @@ function ForgotPassword() {
           </form>
         </Card.Body>
       </Card>
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title="Success"
+        description="We've send you an email with a recovery link."
+      />
     </Container>
   );
 }

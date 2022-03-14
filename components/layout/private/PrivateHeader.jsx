@@ -16,12 +16,12 @@ const additionalLinks = [
   {
     name: "Help",
     description: "Struggling with something?",
-    href: path.help,
+    href: path.help.general,
   },
   {
     name: "API",
     description: "Take a look at our API and documentation!",
-    href: path.api,
+    href: path.help.api,
   },
 ];
 

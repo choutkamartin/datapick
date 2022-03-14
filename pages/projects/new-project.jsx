@@ -89,6 +89,7 @@ function NewProject() {
                   register={register}
                   errors={errors.projectType}
                   required
+                  readOnly={true}
                 >
                   <option value="image">Image annotation</option>
                   <option value="text">Text Annotation</option>

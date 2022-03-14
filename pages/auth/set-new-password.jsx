@@ -7,7 +7,7 @@ import AlertError from "components/alerts/AlertError";
 import Container from "components/Container";
 import Card from "components/Card";
 
-function NewUser({ user, error }) {
+function SetNewPassword({ user, error }) {
   const {
     register,
     handleSubmit,
@@ -17,7 +17,7 @@ function NewUser({ user, error }) {
 
   const onSubmit = async (data) => {
     if (data.password === data.passwordRepeat) {
-      const response = await fetch("/api/auth/set-password", {
+      const response = await fetch("/api/auth/set-new-password", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -42,21 +42,27 @@ function NewUser({ user, error }) {
 
   if (error) {
     return (
-      <main className="bg-primary-100 p-20 shadow mx-auto min-w-6/12">
-        <Heading headingLevel="h2" className="mb-8">
-          Set up your account
-        </Heading>
-        <AlertError title={error.message} className="mb-6" />
-      </main>
+      <Container
+        variant="box"
+        className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
+      >
+        <Card>
+          <Card.Head className="text-white">
+            <Heading headingLevel="h2">Set up your account</Heading>
+          </Card.Head>
+          <Card.Body>
+            <AlertError title={error.message} className="mb-6" />
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
 
   return (
     <Container
       variant="box"
-      className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
     >
-      <Card>
+      <Card className="w-full">
         <Card.Head className="text-white">
           <Heading headingLevel="h2">Set up your account</Heading>
         </Card.Head>
@@ -66,27 +72,17 @@ function NewUser({ user, error }) {
               className="flex flex-col gap-y-4"
               onSubmit={handleSubmit(onSubmit)}
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
-                <Input
-                  label="E-mail address"
-                  id="email"
-                  type="text"
-                  placeholder="email@email.com"
-                  register={register}
-                  errors={errors.email}
-                  defaultValue={user.email}
-                  readOnly
-                  required
-                />
-                <Input
-                  label="Name"
-                  id="name"
-                  type="text"
-                  register={register}
-                  errors={errors.name}
-                  required
-                />
-              </div>
+              <Input
+                label="E-mail address"
+                id="email"
+                type="text"
+                placeholder="email@email.com"
+                register={register}
+                errors={errors.email}
+                defaultValue={user.email}
+                readOnly
+                required
+              />
               <Input
                 label="Password"
                 id="password"
@@ -112,12 +108,14 @@ function NewUser({ user, error }) {
   );
 }
 
-export default NewUser;
+export default SetNewPassword;
 
 export async function getServerSideProps({ query }) {
   const url = process.env.NEXTAUTH_URL;
   const { token } = query;
-  const response = await fetch(`${url}/api/auth/verify-token?token=${token}`);
+  const response = await fetch(
+    `${url}/api/auth/verify-recovery-token?token=${token}`
+  );
   if (!response.ok) {
     const error = await response.json();
     return {
