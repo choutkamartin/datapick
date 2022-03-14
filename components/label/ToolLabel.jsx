@@ -29,6 +29,12 @@ export default function ToolLabel({
   const [multiplier, setMultiplier] = useState(1);
 
   /**
+   * Load S3 bucket URI from the environment variable which is exposed to the browser
+   * @link https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
+   */
+  const bucketUri = process.env.NEXT_PUBLIC_AWS_S3_URI;
+
+  /**
    * Executes when the user clicks on the drawing box, sets a mouseDown state to true, gets coordinates of the object and sets them. It draws either a polygon or a rectangle based on a selected tool.
    * @param {*} e An event from the event listener
    */
@@ -246,7 +252,7 @@ export default function ToolLabel({
         }}
       >
         <img
-          src={`https://datapick.s3.eu-central-1.amazonaws.com/${image.key}`}
+          src={`${bucketUri}${image.key}`}
           alt="Image to annotate"
           className="block image-annotation"
           onLoad={handleImageLoad}
