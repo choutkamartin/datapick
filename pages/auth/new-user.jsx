@@ -1,5 +1,6 @@
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import Head from "next/head";
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import Heading from "components/Heading";
@@ -52,63 +53,72 @@ function NewUser({ user, error }) {
   }
 
   return (
-    <Container
-      variant="box"
-      className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
-    >
-      <Card>
-        <Card.Head className="text-white">
-          <Heading headingLevel="h2">Set up your account</Heading>
-        </Card.Head>
-        <Card.Body>
-          <div className="relative gap-x-36 gap-y-8">
-            <form
-              className="flex flex-col gap-y-4"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+    <>
+      <Head>
+        <title>Create account - Datapick</title>
+        <meta
+          name="description"
+          content="Datapick is a tool for labelling raw data. These labelled data can be later used for a machine learning model."
+        />
+      </Head>
+      <Container
+        variant="box"
+        className="py-8 lg:py-36 bg-gradient-to-r from-indigo-500 to-violet-500"
+      >
+        <Card>
+          <Card.Head className="text-white">
+            <Heading headingLevel="h2">Set up your account</Heading>
+          </Card.Head>
+          <Card.Body>
+            <div className="relative gap-x-36 gap-y-8">
+              <form
+                className="flex flex-col gap-y-4"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4">
+                  <Input
+                    label="E-mail address"
+                    id="email"
+                    type="text"
+                    placeholder="email@email.com"
+                    register={register}
+                    errors={errors.email}
+                    defaultValue={user.email}
+                    readOnly
+                    required
+                  />
+                  <Input
+                    label="Name"
+                    id="name"
+                    type="text"
+                    register={register}
+                    errors={errors.name}
+                    required
+                  />
+                </div>
                 <Input
-                  label="E-mail address"
-                  id="email"
-                  type="text"
-                  placeholder="email@email.com"
+                  label="Password"
+                  id="password"
+                  type="password"
                   register={register}
-                  errors={errors.email}
-                  defaultValue={user.email}
-                  readOnly
+                  errors={errors.passwordRepeat}
                   required
                 />
                 <Input
-                  label="Name"
-                  id="name"
-                  type="text"
+                  label="Repeat password"
+                  id="passwordRepeat"
+                  type="password"
                   register={register}
-                  errors={errors.name}
+                  errors={errors.passwordRepeat}
                   required
                 />
-              </div>
-              <Input
-                label="Password"
-                id="password"
-                type="password"
-                register={register}
-                errors={errors.passwordRepeat}
-                required
-              />
-              <Input
-                label="Repeat password"
-                id="passwordRepeat"
-                type="password"
-                register={register}
-                errors={errors.passwordRepeat}
-                required
-              />
-              <Button type="submit">Continue</Button>
-            </form>
-          </div>
-        </Card.Body>
-      </Card>
-    </Container>
+                <Button type="submit">Continue</Button>
+              </form>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
+    </>
   );
 }
 

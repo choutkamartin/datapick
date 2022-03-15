@@ -1,6 +1,7 @@
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import LineVertical from "components/LineVertical";
 import Input from "components/inputs/Input";
 import Heading from "components/Heading";
@@ -13,7 +14,6 @@ import Card from "components/Card";
 import Container from "components/Container";
 import path from "utils/path";
 import Paragraph from "components/Paragraph";
-import PublicLayout from "components/layout/public/PublicLayout";
 
 const authErrors = {
   Signin: "Try signing with a different account.",
@@ -48,53 +48,62 @@ function SignIn() {
   };
 
   return (
-    <Container variant="box" className="py-8 lg:py-36">
-      <Card className="w-full">
-        <Card.Head className="text-white">
-          <div className="flex flex-col">
-            <Heading headingLevel="h2" className="text-white mb-3">
-              Sign In
-            </Heading>
-            <Paragraph className="text-white">
-              Login to your account with one of the following methods.
-            </Paragraph>
-          </div>
-        </Card.Head>
-        <Card.Body>
-          {error && <AlertError title={errorMessage} className="mb-6" />}
-          <div className="relative grid md:grid-cols-2 gap-x-36 gap-y-8">
-            <Form onSubmit={handleSubmit(onSubmit)}>
-              <Input
-                label="E-mail address"
-                id="email"
-                type="text"
-                register={register}
-                errors={errors.email}
-                required
-              />
-              <Input
-                label="Password"
-                id="password"
-                type="password"
-                register={register}
-                errors={errors.password}
-                required
-              />
-              <Button type="submit">Continue</Button>
-              <Anchor to={path.auth.forgotPassword} type="link">
-                Forgot password?
-              </Anchor>
-            </Form>
-            <LineVertical />
-            <div className="text-center">
-              <div className="flex flex-col items-center gap-y-4">
-                <ButtonsOAuth />
+    <>
+      <Head>
+        <title>Sign In - Datapick</title>
+        <meta
+          name="description"
+          content="Datapick is a tool for labelling raw data. These labelled data can be later used for a machine learning model."
+        />
+      </Head>
+      <Container variant="box" className="py-8 lg:py-36">
+        <Card className="w-full">
+          <Card.Head className="text-white">
+            <div className="flex flex-col">
+              <Heading headingLevel="h2" className="text-white mb-3">
+                Sign In
+              </Heading>
+              <Paragraph className="text-white">
+                Login to your account with one of the following methods.
+              </Paragraph>
+            </div>
+          </Card.Head>
+          <Card.Body>
+            {error && <AlertError title={errorMessage} className="mb-6" />}
+            <div className="relative grid md:grid-cols-2 gap-x-36 gap-y-8">
+              <Form onSubmit={handleSubmit(onSubmit)}>
+                <Input
+                  label="E-mail address"
+                  id="email"
+                  type="text"
+                  register={register}
+                  errors={errors.email}
+                  required
+                />
+                <Input
+                  label="Password"
+                  id="password"
+                  type="password"
+                  register={register}
+                  errors={errors.password}
+                  required
+                />
+                <Button type="submit">Continue</Button>
+                <Anchor to={path.auth.forgotPassword} type="link">
+                  Forgot password?
+                </Anchor>
+              </Form>
+              <LineVertical />
+              <div className="text-center">
+                <div className="flex flex-col items-center gap-y-4">
+                  <ButtonsOAuth />
+                </div>
               </div>
             </div>
-          </div>
-        </Card.Body>
-      </Card>
-    </Container>
+          </Card.Body>
+        </Card>
+      </Container>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import Head from "next/head";
 import Input from "components/inputs/Input";
 import Button from "components/buttons/Button";
 import Heading from "components/Heading";
@@ -59,52 +60,59 @@ function SetNewPassword({ user, error }) {
   }
 
   return (
-    <Container
-      variant="box"
-    >
-      <Card className="w-full">
-        <Card.Head className="text-white">
-          <Heading headingLevel="h2">Set up your account</Heading>
-        </Card.Head>
-        <Card.Body>
-          <div className="relative gap-x-36 gap-y-8">
-            <form
-              className="flex flex-col gap-y-4"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <Input
-                label="E-mail address"
-                id="email"
-                type="text"
-                placeholder="email@email.com"
-                register={register}
-                errors={errors.email}
-                defaultValue={user.email}
-                readOnly
-                required
-              />
-              <Input
-                label="Password"
-                id="password"
-                type="password"
-                register={register}
-                errors={errors.passwordRepeat}
-                required
-              />
-              <Input
-                label="Repeat password"
-                id="passwordRepeat"
-                type="password"
-                register={register}
-                errors={errors.passwordRepeat}
-                required
-              />
-              <Button type="submit">Continue</Button>
-            </form>
-          </div>
-        </Card.Body>
-      </Card>
-    </Container>
+    <>
+      <Head>
+        <title>Set new password - Datapick</title>
+        <meta
+          name="description"
+          content="Datapick is a tool for labelling raw data. These labelled data can be later used for a machine learning model."
+        />
+      </Head>
+      <Container variant="box">
+        <Card className="w-full">
+          <Card.Head className="text-white">
+            <Heading headingLevel="h2">Set up your account</Heading>
+          </Card.Head>
+          <Card.Body>
+            <div className="relative gap-x-36 gap-y-8">
+              <form
+                className="flex flex-col gap-y-4"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <Input
+                  label="E-mail address"
+                  id="email"
+                  type="text"
+                  placeholder="email@email.com"
+                  register={register}
+                  errors={errors.email}
+                  defaultValue={user.email}
+                  readOnly
+                  required
+                />
+                <Input
+                  label="Password"
+                  id="password"
+                  type="password"
+                  register={register}
+                  errors={errors.passwordRepeat}
+                  required
+                />
+                <Input
+                  label="Repeat password"
+                  id="passwordRepeat"
+                  type="password"
+                  register={register}
+                  errors={errors.passwordRepeat}
+                  required
+                />
+                <Button type="submit">Continue</Button>
+              </form>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
+    </>
   );
 }
 
