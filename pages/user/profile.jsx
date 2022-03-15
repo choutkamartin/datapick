@@ -28,21 +28,6 @@ const sidebarData = [
     href: path.user.profile,
     icon: faUser,
   },
-  {
-    name: "Team",
-    href: path.user.team,
-    icon: faUsers,
-  },
-  {
-    name: "API keys",
-    href: path.user.apiKeys,
-    icon: faKey,
-  },
-  {
-    name: "Billing",
-    href: path.user.billingInfo,
-    icon: faMoneyBill,
-  },
 ];
 
 function Profile() {
