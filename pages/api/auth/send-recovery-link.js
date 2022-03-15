@@ -16,9 +16,9 @@ export default async function handler(req, res) {
     value: recoveryToken,
     expiresAt: new Date(currentDate.getTime() + 20 * 60 * 1000),
   };
-  user.save(function (err, result) {
+  user.save(function (err) {
     if (err) {
-      console.log(err);
+      res.status(500).end();
     } else {
       const recoveryLink = `${url}${setNewPassword}?token=${recoveryToken}`;
       sendRecoveryEmail(email, recoveryLink).then((response) => {
