@@ -68,7 +68,7 @@ export default function PublicFooter() {
               Datapick is a data labelling platform created as a bachelors
               project at{" "}
               <Anchor type="link" to="https://www.czu.cz/">
-                CULS Prague
+                CZU Prague
               </Anchor>
               . The data labelling platform supports data upload, taxonomy,
               project creation, image labelling and more.
