@@ -15,12 +15,7 @@ import Input from "components/inputs/Input";
 import Form from "components/forms/Form";
 import Paragraph from "components/Paragraph";
 import path from "utils/path";
-import {
-  faKey,
-  faMoneyBill,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const sidebarData = [
   {
