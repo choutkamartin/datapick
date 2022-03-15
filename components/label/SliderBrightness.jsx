@@ -7,7 +7,7 @@ export default function SliderBrightness({ value, setValue }) {
   return (
     <div>
       <button
-        className="p-2 bg-indigo-700 rounded hover:bg-indigo-600"
+        className="p-2 bg-indigo-600 rounded hover:bg-indigo-700"
         onClick={() => setVisible(!visible)}
       >
         <SunIcon className="h-6 w-6 text-white" />
