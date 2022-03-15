@@ -24,10 +24,6 @@ function SignUp() {
     formState: { errors },
   } = useForm();
 
-  /**
-   * Submit the form to the API
-   * @param {Object} data Form data
-   */
   const onSubmit = async (data) => {
     setError(null);
     const response = await fetch("/api/auth/sign-up", {

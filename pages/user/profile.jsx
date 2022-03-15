@@ -15,33 +15,13 @@ import Input from "components/inputs/Input";
 import Form from "components/forms/Form";
 import Paragraph from "components/Paragraph";
 import path from "utils/path";
-import {
-  faKey,
-  faMoneyBill,
-  faUser,
-  faUsers,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const sidebarData = [
   {
     name: "Profile",
     href: path.user.profile,
     icon: faUser,
-  },
-  {
-    name: "Team",
-    href: path.user.team,
-    icon: faUsers,
-  },
-  {
-    name: "API keys",
-    href: path.user.apiKeys,
-    icon: faKey,
-  },
-  {
-    name: "Billing",
-    href: path.user.billingInfo,
-    icon: faMoneyBill,
   },
 ];
 

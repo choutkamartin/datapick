@@ -4,7 +4,6 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   PlusIcon,
-  XIcon,
 } from "@heroicons/react/outline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -14,7 +13,6 @@ import {
   faDrawPolygon,
   faEdit,
   faSquare,
-  faTimes,
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 

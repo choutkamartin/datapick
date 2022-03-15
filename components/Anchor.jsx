@@ -1,5 +1,4 @@
 import { forwardRef } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { joinClassNames } from "utils/helpers";
 
@@ -7,7 +6,6 @@ export default forwardRef(function Anchor(
   { children, to, type, variant, className },
   ref
 ) {
-  const router = useRouter();
   const getClassNames = () => {
     var styles;
     if (type === "link") {
